@@ -1,0 +1,38 @@
+{
+  "name": "resapp",
+  "version": "1.0.0",
+  "description": "Restaurant app",
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "scripts": {
+    "start": "parcel index.html",
+    "build": "parcel build index.html",
+    "test": "jest"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.29.0",
+    "@babel/preset-env": "^7.29.0",
+    "@babel/preset-react": "^7.28.5",
+    "@testing-library/dom": "^10.4.1",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.2",
+    "babel-jest": "^30.2.0",
+    "jest": "^30.2.0",
+    "jest-environment-jsdom": "^30.2.0",
+    "parcel": "^2.16.3"
+  },
+  "dependencies": {
+    "@reduxjs/toolkit": "^2.11.2",
+    "@tailwindcss/postcss": "^4.1.18",
+    "cors": "^2.8.6",
+    "express": "^5.2.1",
+    "node-fetch": "^2.7.0",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4",
+    "react-icons": "^5.5.0",
+    "react-redux": "^9.2.0",
+    "react-router-dom": "^6.30.3",
+    "tailwindcss": "^4.1.18"
+  }
+}
