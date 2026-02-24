@@ -2,4 +2,4 @@ export const CDN_URL = "https://media-assets.swiggy.com/swiggy/image/upload/fl_l
 
 export const LOGO_URL = "https://cdn-icons-png.flaticon.com/128/3655/3655682.png";
 
-export const MENU_API = "https://resapp-sr11.onrender.com/api/menu/";
+export const MENU_API = process.env.REACT_APP_MENU_API;
