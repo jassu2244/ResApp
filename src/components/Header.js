@@ -176,7 +176,7 @@ const Header = () => {
             onMouseEnter={(e) => (e.currentTarget.style.borderColor = "var(--yellow)")}
             onMouseLeave={(e) => (e.currentTarget.style.borderColor = "var(--border)")}
           >
-            {theme === "dark" ? "☀️" : "🌙"}
+            <span style={{ lineHeight: 1, display: "flex", alignItems: "center", justifyContent: "center" }}>{theme === "dark" ? "☀️" : "🌙"}</span>
           </button>
 
           <Link to="/cart" style={{ textDecoration: "none" }}>

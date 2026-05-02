@@ -246,7 +246,7 @@ const Body = () => {
 
               {/* Food circle */}
               <div style={{ width: "380px", height: "380px", borderRadius: "50%", background: "radial-gradient(circle at 38% 35%, #3a1a08, #1a0a02)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "8.5rem", border: "2px solid rgba(232,35,26,0.12)", overflow: "hidden" }}>
-                <span key={foodKey} className="food-swap">
+                <span key={foodKey} className="food-swap" style={{ lineHeight: 1, display: "flex", alignItems: "center", justifyContent: "center" }}>
                   {HERO_FOODS[foodIdx]}
                 </span>
               </div>
