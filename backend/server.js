@@ -1,9 +1,10 @@
 const express = require("express");
 const cors = require("cors");
-const fetch = require("node-fetch");
+let fetch;
+(async () => { fetch = (await import("node-fetch")).default; })();
 
 const app = express();
-const PORT = 5000;
+const PORT = process.env.PORT || 3001;
 
 // Swiggy API base URL for menu
 const SWIGGY_MENU_API =
@@ -5279,6 +5280,96 @@ const mockMenuData = {
     ],
   },
 };
+
+const SWIGGY_RESTAURANT_API =
+  "https://www.swiggy.com/dapi/restaurants/list/v5?lat=25.332590909546596&lng=83.00543960183859&collection=83637&tags=layout_CCS_Burger&sortBy=&filters=&type=rcv2&offset=0&page_type=null";
+
+const SWIGGY_HEADERS = {
+  "User-Agent":
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+  Accept: "application/json, text/plain, */*",
+  "Accept-Language": "en-US,en;q=0.9",
+  Referer: "https://www.swiggy.com/",
+  Origin: "https://www.swiggy.com",
+  "Cache-Control": "no-cache",
+};
+
+// Mock restaurant list data for fallback
+const mockRestaurantData = {
+  statusCode: 0,
+  data: {
+    cards: [
+      {
+        card: {
+          card: {
+            "@type": "type.googleapis.com/swiggy.presentation.food.v2.Restaurant",
+            info: {
+              id: "358251",
+              name: "Wendy's Burgers",
+              cloudinaryImageId: "RX_THUMBNAIL/IMAGES/VENDOR/2025/1/11/41fc33b1-1a01-45a1-8062-6875cd824c67_358251.JPG",
+              locality: "Sector 4",
+              areaName: "Sector 4",
+              costForTwo: "₹350 for two",
+              cuisines: ["Burgers", "American"],
+              avgRating: 4.4,
+              parentId: "972",
+              avgRatingString: "4.4",
+              totalRatingsString: "9.0K+",
+              promoted: false,
+              sla: { deliveryTime: 46, slaString: "45-50 MINS" },
+            },
+          },
+        },
+      },
+      {
+        card: {
+          card: {
+            "@type": "type.googleapis.com/swiggy.presentation.food.v2.Restaurant",
+            info: {
+              id: "253783",
+              name: "McDonald's",
+              cloudinaryImageId: "RX_THUMBNAIL/IMAGES/VENDOR/2025/1/9/248be8d0-1623-4b8a-b42b-11072a5431d8_253783.JPG",
+              locality: "Nadesar",
+              areaName: "Nadesar",
+              costForTwo: "₹400 for two",
+              cuisines: ["American", "Fast Food", "Beverages"],
+              avgRating: 4.4,
+              parentId: "630",
+              avgRatingString: "4.4",
+              totalRatingsString: "13K+",
+              promoted: true,
+              sla: { deliveryTime: 30, slaString: "25-35 MINS" },
+            },
+          },
+        },
+      },
+    ],
+  },
+};
+
+// Restaurant list API endpoint - Proxy to Swiggy API
+app.get("/api/restaurants", async (req, res) => {
+  console.log("Fetching restaurant list");
+  try {
+    const response = await fetch(SWIGGY_RESTAURANT_API, { headers: SWIGGY_HEADERS });
+    console.log(`Swiggy restaurant API status: ${response.status}`);
+    if (!response.ok) {
+      return res.json(mockRestaurantData);
+    }
+    const text = await response.text();
+    try {
+      const data = JSON.parse(text);
+      console.log("Successfully fetched restaurant list");
+      res.json(data);
+    } catch (parseError) {
+      console.log("Restaurant list response not JSON, using mock data");
+      res.json(mockRestaurantData);
+    }
+  } catch (error) {
+    console.error("Error fetching restaurant list:", error);
+    res.json(mockRestaurantData);
+  }
+});
 
 // Menu API endpoint - Proxy to Swiggy API
 app.get("/api/menu/:restaurantId", async (req, res) => {

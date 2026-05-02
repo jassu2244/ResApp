@@ -26,10 +26,7 @@ const Body = () => {
   }, []);
 
   const fetchData = async () => {
-    // Using your working API
-    const data = await fetch(
-      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=25.332590909546596&lng=83.00543960183859&collection=83637&tags=layout_CCS_Burger&sortBy=&filters=&type=rcv2&offset=0&page_type=null",
-    );
+    const data = await fetch("http://localhost:3001/api/restaurants");
 
     const json = await data.json();
 
