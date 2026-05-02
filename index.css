@@ -12,12 +12,13 @@
   --text-muted:  #9CA3AF;
   --border:      rgba(255,255,255,0.08);
   --border-card: rgba(255,255,255,0.10);
+  --nav-bg:      rgba(21,21,21,0.90);
   --r-sm:        8px;
   --r-md:        16px;
   --r-lg:        24px;
   --r-pill:      999px;
   --f-display:   'Poppins', sans-serif;
-  --f-body:      'Nunito', sans-serif;
+  --f-body:      'Hanken Grotesk', sans-serif;
   --f-mono:      'Space Grotesk', sans-serif;
 }
 
@@ -34,6 +35,7 @@
   --text-muted:  #7A7269;
   --border:      rgba(0,0,0,0.08);
   --border-card: rgba(0,0,0,0.09);
+  --nav-bg:      rgba(253,250,244,0.92);
 }
 
 /* Base */
@@ -181,7 +183,7 @@ a { text-decoration: none; color: inherit; }
   display: grid;
   grid-template-columns: 1fr 1fr;
   align-items: center;
-  padding-top: 64px;
+  padding-top: 80px;
 }
 
 /* Section titles */

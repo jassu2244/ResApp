@@ -8,7 +8,7 @@ import { CDN_URL } from "../utils/constants";
 const RestaurantMenu = () => {
   const { resId } = useParams();
   const resInfo = useRestaurantMenu(resId);
-  const [showIndex, setShowIndex] = useState(null);
+  const [showIndex, setShowIndex] = useState(0);
 
   if (resInfo === null) return <ShimmerMenu />;
 
@@ -33,7 +33,7 @@ const RestaurantMenu = () => {
   return (
     <div style={{ background: "var(--bg)", minHeight: "100vh" }}>
 
-      <div style={{ background: "var(--surface)", borderBottom: "1px solid var(--border)", paddingTop: "100px" }}>
+      <div style={{ background: "var(--surface)", borderBottom: "1px solid var(--border)", paddingTop: "80px" }}>
         <div style={{ maxWidth: "900px", margin: "0 auto", padding: "0 32px 40px", display: "flex", gap: "32px", alignItems: "center" }}>
           {cloudinaryImageId && (
             <div style={{ width: "130px", height: "130px", borderRadius: "var(--r-md)", overflow: "hidden", flexShrink: 0, border: "1px solid var(--border-card)" }}>
@@ -83,7 +83,7 @@ const RestaurantMenu = () => {
                 key={category?.card?.card.title}
                 data={category?.card?.card}
                 showItems={index === showIndex}
-                setShowIndex={() => setShowIndex(showIndex === index ? null : index)}
+                setShowIndex={() => setShowIndex(index)}
               />
             ))}
           </>
