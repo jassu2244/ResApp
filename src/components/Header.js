@@ -38,8 +38,8 @@ const Header = () => {
       style={{
         position: "fixed",
         top: "10px",
-        left: "14px",
-        right: "14px",
+        left: "20px",
+        right: "20px",
         zIndex: 200,
         background: "var(--nav-bg)",
         backdropFilter: "blur(20px)",
@@ -56,7 +56,7 @@ const Header = () => {
           maxWidth: "1280px",
           margin: "0 auto",
           padding: "0 16px",
-          height: "50px",
+          height: "56px",
           display: "flex",
           alignItems: "center",
         }}
