@@ -90,6 +90,30 @@ a { text-decoration: none; color: inherit; }
   80%  { transform: translate(-6px, -10px) scale(1.2); opacity: 1; }
   100% { transform: translate(0, 0) scale(1); opacity: 0.9; }
 }
+@keyframes spinRing {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+@keyframes orbit {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+@keyframes pulseGlow {
+  0%, 100% { transform: scale(1); opacity: 0.5; }
+  50%       { transform: scale(1.18); opacity: 1; }
+}
+@keyframes sparkle {
+  0%, 100% { transform: scale(1); opacity: 0.4; }
+  50%       { transform: scale(2); opacity: 1; }
+}
+@keyframes floatCard {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-10px); }
+}
+@keyframes floatCard2 {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-8px); }
+}
 
 /* Animation classes */
 .anim-1   { animation: fadeUp 0.45s 0.05s both; }
@@ -101,10 +125,20 @@ a { text-decoration: none; color: inherit; }
 .float-hero  { animation: floatY 4s ease-in-out infinite; will-change: transform; }
 .float-dot   { animation: floatY 6s ease-in-out 1s infinite; will-change: transform; }
 .food-swap   { display: inline-block; animation: foodSwap 0.55s cubic-bezier(0.34, 1.56, 0.64, 1) both; }
-.drift-green { animation: driftGreen 6s ease-in-out infinite; will-change: transform; }
-.drift-red   { animation: driftRed 5s ease-in-out 1.2s infinite; will-change: transform; }
-.bounce-in   { animation: bounceIn 0.35s both; }
-.card-anim   { animation: cardFadeUp 320ms ease-out both; }
+.drift-green        { animation: driftGreen 6s ease-in-out infinite; will-change: transform; }
+.drift-red          { animation: driftRed 5s ease-in-out 1.2s infinite; will-change: transform; }
+.bounce-in          { animation: bounceIn 0.35s both; }
+.card-anim          { animation: cardFadeUp 320ms ease-out both; }
+.spin-ring          { animation: spinRing 28s linear infinite; will-change: transform; }
+.spin-ring-reverse  { animation: spinRing 20s linear reverse infinite; will-change: transform; }
+.orbit-fast         { animation: orbit 7s linear infinite; will-change: transform; }
+.orbit-slow-reverse { animation: orbit 12s linear reverse infinite; will-change: transform; }
+.pulse-glow         { animation: pulseGlow 3.5s ease-in-out infinite; will-change: transform, opacity; }
+.sparkle-1          { animation: sparkle 2.4s ease-in-out infinite; }
+.sparkle-2          { animation: sparkle 3.2s ease-in-out 0.7s infinite; }
+.sparkle-3          { animation: sparkle 2.8s ease-in-out 1.4s infinite; }
+.float-card         { animation: floatCard 5s ease-in-out 0.4s infinite; }
+.float-card-2       { animation: floatCard2 6.5s ease-in-out 1s infinite; }
 
 /* Shimmer */
 .shimmer-elem {
@@ -165,5 +199,8 @@ a { text-decoration: none; color: inherit; }
 @media (prefers-reduced-motion: reduce) {
   .anim-1,.anim-2,.anim-3,.anim-4,.anim-img { animation: none; opacity: 1; transform: none; }
   .float-hero,.float-dot,.drift-green,.drift-red,.food-swap { animation: none; }
+  .spin-ring,.spin-ring-reverse,.orbit-fast,.orbit-slow-reverse { animation: none; }
+  .pulse-glow,.sparkle-1,.sparkle-2,.sparkle-3 { animation: none; }
+  .float-card,.float-card-2 { animation: none; }
   .card-anim,.bounce-in { animation: none; opacity: 1; }
 }
