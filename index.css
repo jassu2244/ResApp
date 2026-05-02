@@ -1,5 +1,3 @@
-@import "tailwindcss";
-
 /* ── Design Tokens ──────────────────────────────── */
 :root {
   --bg:          #0A0A0A;
@@ -53,53 +51,46 @@ a { text-decoration: none; color: inherit; }
 
 /* ── Keyframes ──────────────────────────────────── */
 @keyframes fadeUp {
-  from { opacity: 0; transform: translateY(28px); }
+  from { opacity: 0; transform: translateY(24px); }
   to   { opacity: 1; transform: translateY(0); }
 }
 @keyframes floatY {
-  0%,100% { transform: translateY(0) rotate(0deg); }
-  50%      { transform: translateY(-14px) rotate(8deg); }
+  0%,100% { transform: translateY(0); }
+  50%      { transform: translateY(-12px); }
 }
 @keyframes shimmer {
   0%   { background-position: 200% 0; }
   100% { background-position: -200% 0; }
 }
-@keyframes pulseRed {
-  0%,100% { box-shadow: 0 8px 24px var(--red-glow); }
-  50%      { box-shadow: 0 8px 36px rgba(232,35,26,0.65); }
-}
 @keyframes bounceIn {
   0%   { transform: scale(0.5); opacity: 0; }
-  70%  { transform: scale(1.2); }
+  70%  { transform: scale(1.15); }
   100% { transform: scale(1); opacity: 1; }
 }
 @keyframes cardFadeUp {
-  from { opacity: 0; transform: translateY(16px); }
+  from { opacity: 0; transform: translateY(14px); }
   to   { opacity: 1; transform: translateY(0); }
 }
 
 /* ── Animation utility classes ──────────────────── */
-.anim-1   { animation: fadeUp 0.5s 0.10s both; }
-.anim-2   { animation: fadeUp 0.5s 0.25s both; }
-.anim-3   { animation: fadeUp 0.5s 0.40s both; }
-.anim-4   { animation: fadeUp 0.5s 0.55s both; }
-.anim-img { animation: fadeUp 0.7s 0.20s both; }
+.anim-1   { animation: fadeUp 0.45s 0.05s both; }
+.anim-2   { animation: fadeUp 0.45s 0.18s both; }
+.anim-3   { animation: fadeUp 0.45s 0.32s both; }
+.anim-4   { animation: fadeUp 0.45s 0.46s both; }
+.anim-img { animation: fadeUp 0.6s  0.10s both; }
 
-.float-1 { animation: floatY 3.0s ease-in-out 0.0s infinite; }
-.float-2 { animation: floatY 4.0s ease-in-out 0.5s infinite; }
-.float-3 { animation: floatY 3.5s ease-in-out 0.8s infinite; }
-.float-4 { animation: floatY 5.0s ease-in-out 1.0s infinite; }
-.float-5 { animation: floatY 4.5s ease-in-out 1.5s infinite; }
+/* Only 2 float elements for perf */
+.float-hero { animation: floatY 4s ease-in-out infinite; will-change: transform; }
+.float-dot  { animation: floatY 6s ease-in-out 1s infinite; will-change: transform; }
 
-.pulse-red  { animation: pulseRed 2.5s infinite; }
-.bounce-in  { animation: bounceIn 0.4s both; }
-.card-anim  { animation: cardFadeUp 380ms ease-out both; }
+.bounce-in  { animation: bounceIn 0.35s both; }
+.card-anim  { animation: cardFadeUp 320ms ease-out both; }
 
 /* ── Shimmer ────────────────────────────────────── */
 .shimmer-elem {
   background: linear-gradient(90deg, #151515, #282828, #151515);
   background-size: 200% 100%;
-  animation: shimmer 1.5s infinite linear;
+  animation: shimmer 1.4s infinite linear;
   border-radius: var(--r-sm);
 }
 [data-theme="light"] .shimmer-elem {
@@ -132,37 +123,50 @@ a { text-decoration: none; color: inherit; }
 .section-title::after {
   content: '';
   display: block;
-  width: 44px;
+  width: 40px;
   height: 3px;
   background: var(--red);
-  margin-top: 6px;
+  margin-top: 5px;
   border-radius: 2px;
 }
 
 /* ── Header ─────────────────────────────────────── */
-.header { position: fixed; top: 0; left: 0; right: 0; z-index: 200; transition: all 300ms ease; }
-.header--scrolled {
-  background: rgba(10,10,10,0.85);
-  backdrop-filter: blur(12px);
-  border-bottom: 1px solid var(--border);
-}
-[data-theme="light"] .header--scrolled {
-  background: rgba(245,240,232,0.88);
-  backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(0,0,0,0.08);
+.header {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 200;
+  transition: background 300ms ease, backdrop-filter 300ms ease, border-color 300ms ease;
 }
 
-/* ── Cards hover ────────────────────────────────── */
-[data-theme="light"] .res-card:hover,
-[data-theme="light"] .feat-card:hover {
-  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+/* Very light blur glass on scroll — dark theme */
+.header--scrolled {
+  background: rgba(10, 10, 10, 0.30);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+/* Very light blur glass on scroll — light theme (cream tinted) */
+[data-theme="light"] .header--scrolled {
+  background: rgba(245, 240, 232, 0.55);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(0,0,0,0.05);
 }
 
 /* ── Scrollbar ──────────────────────────────────── */
-::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar { width: 4px; }
 ::-webkit-scrollbar-track { background: var(--bg); }
-::-webkit-scrollbar-thumb { background: var(--surface-2); border-radius: 3px; }
+::-webkit-scrollbar-thumb { background: var(--surface-2); border-radius: 2px; }
 
-/* ── Hide scrollbar for horizontal scroll ───────── */
+/* ── Horizontal scroll (featured row) ──────────── */
 .scroll-x { overflow-x: auto; scrollbar-width: none; }
 .scroll-x::-webkit-scrollbar { display: none; }
+
+/* ── Reduce motion ──────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .anim-1,.anim-2,.anim-3,.anim-4,.anim-img { animation: none; opacity: 1; transform: none; }
+  .float-hero,.float-dot { animation: none; }
+  .card-anim { animation: none; opacity: 1; }
+  .bounce-in { animation: none; opacity: 1; }
+}

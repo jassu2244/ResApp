@@ -5,52 +5,45 @@ import Header from "../Header";
 import { BrowserRouter } from "react-router-dom";
 import "@testing-library/jest-dom";
 
-it("Should render Header Component with a login button", () => {
+const renderHeader = () =>
   render(
     <BrowserRouter>
       <Provider store={appStore}>
         <Header />
       </Provider>
-    </BrowserRouter>,
+    </BrowserRouter>
   );
 
-  // const loginButton = screen.getByRole('button'); // is recommended
-
-  const loginButton = screen.getByRole("button", { name: "Login" }); // is recommended
-
-  // const loginButton = screen.getByText('Login'); // not recommended
-
-  expect(loginButton).toBeInTheDocument();
+it("should render the ResApp logo", () => {
+  renderHeader();
+  expect(screen.getByText("ResApp")).toBeInTheDocument();
 });
 
-it("Should render Header Component with cart items 0", () => {
-  render(
-    <BrowserRouter>
-      <Provider store={appStore}>
-        <Header />
-      </Provider>
-    </BrowserRouter>,
-  );
-
-  const cartItems = screen.getByText(/Cart - \(0 items\)/); // is recommended
-
-  expect(cartItems).toBeInTheDocument();
+it("should render Cart button with 0 item count", () => {
+  renderHeader();
+  const cartBtn = screen.getByRole("button", { name: /cart/i });
+  expect(cartBtn).toBeInTheDocument();
+  expect(cartBtn).toHaveTextContent("0");
 });
 
-it("Should change Login Button to Logout on click", () => {
-  render(
-    <BrowserRouter>
-      <Provider store={appStore}>
-        <Header />
-      </Provider>
-    </BrowserRouter>,
-  );
+it("should render theme toggle button", () => {
+  renderHeader();
+  const themeBtn = screen.getByRole("button", { name: /toggle theme/i });
+  expect(themeBtn).toBeInTheDocument();
+});
 
-  const loginButton = screen.getByRole("button", { name: "Login" }); // is recommended
+it("should toggle theme icon when theme button is clicked", () => {
+  renderHeader();
+  const themeBtn = screen.getByRole("button", { name: /toggle theme/i });
+  const initialText = themeBtn.textContent;
+  fireEvent.click(themeBtn);
+  expect(themeBtn.textContent).not.toBe(initialText);
+});
 
-  fireEvent.click(loginButton);
-
-  const logoutButton = screen.getByRole("button", { name: "Logout" });
-
-  expect(logoutButton).toBeInTheDocument();
+it("should render all navigation links", () => {
+  renderHeader();
+  expect(screen.getByText("Home")).toBeInTheDocument();
+  expect(screen.getByText("About")).toBeInTheDocument();
+  expect(screen.getByText("Contact")).toBeInTheDocument();
+  expect(screen.getByText("Grocery")).toBeInTheDocument();
 });

@@ -1,0 +1,22 @@
+{
+  "card": {
+    "card": {
+      "@type": "type.googleapis.com/swiggy.presentation.food.v2.Restaurant",
+      "info": {
+        "id": "253783",
+        "name": "McDonald's",
+        "cloudinaryImageId": "RX_THUMBNAIL/IMAGES/VENDOR/2025/1/9/248be8d0_253783.JPG",
+        "locality": "Nadesar",
+        "areaName": "Nadesar",
+        "costForTwo": "₹400 for two",
+        "cuisines": ["American", "Fast Food", "Beverages"],
+        "avgRating": 4.4,
+        "parentId": "630",
+        "avgRatingString": "4.4",
+        "totalRatingsString": "13K+",
+        "promoted": false,
+        "sla": { "deliveryTime": 30, "slaString": "25-35 MINS" }
+      }
+    }
+  }
+}

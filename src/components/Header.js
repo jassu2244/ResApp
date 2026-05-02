@@ -6,7 +6,9 @@ import { useSelector } from "react-redux";
 
 const Header = () => {
   const [scrolled, setScrolled] = useState(false);
-  const [theme, setTheme] = useState(() => localStorage.getItem("theme") || "dark");
+  const [theme, setTheme] = useState(
+    () => localStorage.getItem("theme") || "light"
+  );
 
   const onlineStatus = useOnlineStatus();
   const { loggedInUser } = useContext(UserContext);
@@ -25,70 +27,86 @@ const Header = () => {
 
   const toggleTheme = () => setTheme((t) => (t === "dark" ? "light" : "dark"));
 
+  const isDark = theme === "dark";
+
   return (
     <header className={`header${scrolled ? " header--scrolled" : ""}`}>
-      <div style={{
-        maxWidth: "1280px",
-        margin: "0 auto",
-        padding: "0 32px",
-        height: "72px",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "space-between",
-        gap: "24px",
-      }}>
+      <div
+        style={{
+          maxWidth: "1280px",
+          margin: "0 auto",
+          padding: "0 32px",
+          height: "68px",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          gap: "20px",
+        }}
+      >
         {/* Logo */}
         <Link to="/">
-          <span style={{
-            fontFamily: "var(--f-display)",
-            fontWeight: 900,
-            fontSize: "1.6rem",
-            color: "var(--yellow)",
-            letterSpacing: "-0.5px",
-          }}>
+          <span
+            style={{
+              fontFamily: "var(--f-display)",
+              fontWeight: 900,
+              fontSize: "1.55rem",
+              color: "var(--yellow)",
+              letterSpacing: "-0.5px",
+            }}
+          >
             ResApp
           </span>
         </Link>
 
         {/* Nav */}
-        <nav style={{ display: "flex", alignItems: "center", gap: "28px" }}>
+        <nav style={{ display: "flex", alignItems: "center", gap: "24px" }}>
           {[
             { to: "/", label: "Home" },
             { to: "/about", label: "About" },
             { to: "/contact", label: "Contact" },
             { to: "/grocery", label: "Grocery" },
           ].map(({ to, label }) => (
-            <Link key={to} to={to} style={{
-              fontFamily: "var(--f-body)",
-              fontWeight: 600,
-              fontSize: "0.95rem",
-              color: "var(--text-muted)",
-              transition: "color 150ms ease",
-            }}
-            onMouseEnter={(e) => e.target.style.color = "var(--text)"}
-            onMouseLeave={(e) => e.target.style.color = "var(--text-muted)"}
+            <Link
+              key={to}
+              to={to}
+              style={{
+                fontFamily: "var(--f-body)",
+                fontWeight: 600,
+                fontSize: "0.92rem",
+                color: "var(--text-muted)",
+                transition: "color 150ms ease",
+              }}
+              onMouseEnter={(e) => (e.target.style.color = "var(--text)")}
+              onMouseLeave={(e) => (e.target.style.color = "var(--text-muted)")}
             >
               {label}
             </Link>
           ))}
         </nav>
 
-        {/* Right: status + theme + cart */}
-        <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
-          <span style={{
-            width: "8px", height: "8px",
-            borderRadius: "50%",
-            backgroundColor: onlineStatus ? "var(--green)" : "var(--red)",
-            display: "inline-block",
-            flexShrink: 0,
-          }} title={onlineStatus ? "Online" : "Offline"} />
+        {/* Right */}
+        <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+          {/* Online indicator */}
+          <span
+            style={{
+              width: "8px",
+              height: "8px",
+              borderRadius: "50%",
+              backgroundColor: onlineStatus ? "var(--green)" : "var(--red)",
+              display: "inline-block",
+              flexShrink: 0,
+            }}
+            title={onlineStatus ? "Online" : "Offline"}
+          />
 
           {loggedInUser && (
-            <span style={{
-              fontFamily: "var(--f-body)",
-              fontSize: "0.85rem",
-              color: "var(--text-muted)",
-            }}>
+            <span
+              style={{
+                fontFamily: "var(--f-body)",
+                fontSize: "0.82rem",
+                color: "var(--text-muted)",
+              }}
+            >
               {loggedInUser}
             </span>
           )}
@@ -97,34 +115,41 @@ const Header = () => {
           <button
             onClick={toggleTheme}
             title="Toggle theme"
+            aria-label="Toggle theme"
             style={{
-              width: "36px",
-              height: "36px",
+              width: "34px",
+              height: "34px",
               borderRadius: "var(--r-pill)",
               backgroundColor: "var(--surface-2)",
               border: "1px solid var(--border)",
               cursor: "pointer",
-              fontSize: "1rem",
+              fontSize: "0.95rem",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              transition: "border-color 150ms ease",
               flexShrink: 0,
+              transition: "border-color 150ms ease",
             }}
-            onMouseEnter={(e) => e.currentTarget.style.borderColor = "var(--red)"}
-            onMouseLeave={(e) => e.currentTarget.style.borderColor = "var(--border)"}
+            onMouseEnter={(e) =>
+              (e.currentTarget.style.borderColor = "var(--yellow)")
+            }
+            onMouseLeave={(e) =>
+              (e.currentTarget.style.borderColor = "var(--border)")
+            }
           >
-            {theme === "dark" ? "☀️" : "🌙"}
+            {isDark ? "☀️" : "🌙"}
           </button>
 
           {/* Cart */}
           <Link to="/cart">
-            <div style={{ position: "relative" }}>
-              <button style={{
+            <button
+              aria-label={`Cart ${cartItems.length} items`}
+              style={{
+                position: "relative",
                 display: "flex",
                 alignItems: "center",
-                gap: "8px",
-                padding: "10px 20px",
+                gap: "7px",
+                padding: "9px 18px",
                 backgroundColor: "var(--green)",
                 color: "#000",
                 border: "none",
@@ -132,18 +157,22 @@ const Header = () => {
                 cursor: "pointer",
                 fontFamily: "var(--f-display)",
                 fontWeight: 700,
-                fontSize: "0.9rem",
+                fontSize: "0.88rem",
                 transition: "box-shadow 200ms ease",
               }}
-              onMouseEnter={(e) => e.currentTarget.style.boxShadow = "0 0 20px var(--green-glow)"}
-              onMouseLeave={(e) => e.currentTarget.style.boxShadow = "none"}
-              >
-                🛒
-                <span style={{ fontFamily: "var(--f-mono)", fontWeight: 700 }}>
-                  {cartItems.length}
-                </span>
-                <span>Cart</span>
-              </button>
+              onMouseEnter={(e) =>
+                (e.currentTarget.style.boxShadow =
+                  "0 0 18px var(--green-glow)")
+              }
+              onMouseLeave={(e) =>
+                (e.currentTarget.style.boxShadow = "none")
+              }
+            >
+              🛒
+              <span style={{ fontFamily: "var(--f-mono)", fontWeight: 700 }}>
+                {cartItems.length}
+              </span>
+              <span>Cart</span>
               {cartItems.length > 0 && (
                 <span
                   key={cartItems.length}
@@ -155,20 +184,20 @@ const Header = () => {
                     backgroundColor: "var(--red)",
                     color: "#fff",
                     borderRadius: "50%",
-                    width: "20px",
-                    height: "20px",
+                    width: "18px",
+                    height: "18px",
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
                     fontFamily: "var(--f-mono)",
-                    fontSize: "0.7rem",
+                    fontSize: "0.65rem",
                     fontWeight: 700,
                   }}
                 >
                   {cartItems.length}
                 </span>
               )}
-            </div>
+            </button>
           </Link>
         </div>
       </div>

@@ -5295,7 +5295,7 @@ const SWIGGY_HEADERS = {
   "Cache-Control": "no-cache",
 };
 
-// Mock restaurant list data for fallback
+// Mock restaurant list data for fallback (10 restaurants)
 const mockRestaurantData = {
   statusCode: 0,
   data: {
@@ -5313,7 +5313,6 @@ const mockRestaurantData = {
               costForTwo: "₹350 for two",
               cuisines: ["Burgers", "American"],
               avgRating: 4.4,
-              parentId: "972",
               avgRatingString: "4.4",
               totalRatingsString: "9.0K+",
               promoted: false,
@@ -5335,11 +5334,178 @@ const mockRestaurantData = {
               costForTwo: "₹400 for two",
               cuisines: ["American", "Fast Food", "Beverages"],
               avgRating: 4.4,
-              parentId: "630",
               avgRatingString: "4.4",
               totalRatingsString: "13K+",
               promoted: true,
               sla: { deliveryTime: 30, slaString: "25-35 MINS" },
+            },
+          },
+        },
+      },
+      {
+        card: {
+          card: {
+            "@type": "type.googleapis.com/swiggy.presentation.food.v2.Restaurant",
+            info: {
+              id: "100001",
+              name: "KFC",
+              cloudinaryImageId: "RX_THUMBNAIL/IMAGES/VENDOR/2024/6/kfc_100001.jpg",
+              locality: "Lanka",
+              areaName: "Lanka",
+              costForTwo: "₹380 for two",
+              cuisines: ["Chicken", "Fast Food", "Snacks"],
+              avgRating: 4.2,
+              avgRatingString: "4.2",
+              totalRatingsString: "21K+",
+              promoted: false,
+              sla: { deliveryTime: 35, slaString: "30-40 MINS" },
+            },
+          },
+        },
+      },
+      {
+        card: {
+          card: {
+            "@type": "type.googleapis.com/swiggy.presentation.food.v2.Restaurant",
+            info: {
+              id: "100002",
+              name: "Domino's Pizza",
+              cloudinaryImageId: "RX_THUMBNAIL/IMAGES/VENDOR/2024/6/dominos_100002.jpg",
+              locality: "Sigra",
+              areaName: "Sigra",
+              costForTwo: "₹450 for two",
+              cuisines: ["Pizza", "Italian", "Beverages"],
+              avgRating: 4.5,
+              avgRatingString: "4.5",
+              totalRatingsString: "17K+",
+              promoted: true,
+              sla: { deliveryTime: 28, slaString: "25-30 MINS" },
+            },
+          },
+        },
+      },
+      {
+        card: {
+          card: {
+            "@type": "type.googleapis.com/swiggy.presentation.food.v2.Restaurant",
+            info: {
+              id: "100003",
+              name: "Subway",
+              cloudinaryImageId: "RX_THUMBNAIL/IMAGES/VENDOR/2024/6/subway_100003.jpg",
+              locality: "Bhelupur",
+              areaName: "Bhelupur",
+              costForTwo: "₹300 for two",
+              cuisines: ["Healthy Food", "Salads", "Wraps"],
+              avgRating: 4.1,
+              avgRatingString: "4.1",
+              totalRatingsString: "8.5K+",
+              promoted: false,
+              sla: { deliveryTime: 25, slaString: "20-30 MINS" },
+            },
+          },
+        },
+      },
+      {
+        card: {
+          card: {
+            "@type": "type.googleapis.com/swiggy.presentation.food.v2.Restaurant",
+            info: {
+              id: "100004",
+              name: "Pizza Hut",
+              cloudinaryImageId: "RX_THUMBNAIL/IMAGES/VENDOR/2024/6/pizzahut_100004.jpg",
+              locality: "Mahmoorganj",
+              areaName: "Mahmoorganj",
+              costForTwo: "₹500 for two",
+              cuisines: ["Pizza", "Pasta", "Desserts"],
+              avgRating: 4.3,
+              avgRatingString: "4.3",
+              totalRatingsString: "11K+",
+              promoted: false,
+              sla: { deliveryTime: 40, slaString: "35-45 MINS" },
+            },
+          },
+        },
+      },
+      {
+        card: {
+          card: {
+            "@type": "type.googleapis.com/swiggy.presentation.food.v2.Restaurant",
+            info: {
+              id: "100005",
+              name: "Biryani Blues",
+              cloudinaryImageId: "RX_THUMBNAIL/IMAGES/VENDOR/2024/6/biryani_100005.jpg",
+              locality: "Assi",
+              areaName: "Assi",
+              costForTwo: "₹320 for two",
+              cuisines: ["Biryani", "Mughlai", "North Indian"],
+              avgRating: 4.7,
+              avgRatingString: "4.7",
+              totalRatingsString: "34K+",
+              promoted: false,
+              sla: { deliveryTime: 45, slaString: "40-50 MINS" },
+            },
+          },
+        },
+      },
+      {
+        card: {
+          card: {
+            "@type": "type.googleapis.com/swiggy.presentation.food.v2.Restaurant",
+            info: {
+              id: "100006",
+              name: "The Tandoor Club",
+              cloudinaryImageId: "RX_THUMBNAIL/IMAGES/VENDOR/2024/6/tandoor_100006.jpg",
+              locality: "Dashashwamedh",
+              areaName: "Dashashwamedh",
+              costForTwo: "₹550 for two",
+              cuisines: ["North Indian", "Tandoor", "Kebabs"],
+              avgRating: 4.3,
+              avgRatingString: "4.3",
+              totalRatingsString: "6.2K+",
+              promoted: false,
+              sla: { deliveryTime: 38, slaString: "35-40 MINS" },
+            },
+          },
+        },
+      },
+      {
+        card: {
+          card: {
+            "@type": "type.googleapis.com/swiggy.presentation.food.v2.Restaurant",
+            info: {
+              id: "100007",
+              name: "Chinese Express",
+              cloudinaryImageId: "RX_THUMBNAIL/IMAGES/VENDOR/2024/6/chinese_100007.jpg",
+              locality: "Lahurabir",
+              areaName: "Lahurabir",
+              costForTwo: "₹280 for two",
+              cuisines: ["Chinese", "Asian", "Noodles"],
+              avgRating: 4.6,
+              avgRatingString: "4.6",
+              totalRatingsString: "14K+",
+              promoted: true,
+              sla: { deliveryTime: 20, slaString: "20-25 MINS" },
+            },
+          },
+        },
+      },
+      {
+        card: {
+          card: {
+            "@type": "type.googleapis.com/swiggy.presentation.food.v2.Restaurant",
+            info: {
+              id: "100008",
+              name: "South Spice",
+              cloudinaryImageId: "RX_THUMBNAIL/IMAGES/VENDOR/2024/6/south_100008.jpg",
+              locality: "Maidagin",
+              areaName: "Maidagin",
+              costForTwo: "₹260 for two",
+              cuisines: ["South Indian", "Dosa", "Idli", "Filter Coffee"],
+              avgRating: 4.5,
+              avgRatingString: "4.5",
+              totalRatingsString: "19K+",
+              promoted: false,
+              sla: { deliveryTime: 22, slaString: "20-25 MINS" },
             },
           },
         },

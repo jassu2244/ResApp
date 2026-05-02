@@ -1,65 +1,41 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, fireEvent } from "@testing-library/react";
 import Contact from "../Contact";
 import "@testing-library/jest-dom";
 
-// * Describe block is used to group the test cases
-describe("Contact Us Page Test Case", () => {
-  // beforeAll(() => {
-  //   console.log('Before All');
-  // });
-
-  // afterAll(() => {
-  //   console.log('After All');
-  // });
-
-  // afterEach(() => {
-  //   console.log('After Each');
-  // });
-
-  // beforeEach(() => {
-  //   console.log('Before Each');
-  // });
-
-  test("Should load Contact component", () => {
+describe("Contact Us Page", () => {
+  test("should render the Contact heading", () => {
     render(<Contact />);
-
-    const heading = screen.getByRole("heading");
-
-    // * Assertion
+    const heading = screen.getByRole("heading", { level: 1 });
     expect(heading).toBeInTheDocument();
   });
 
-  test("Should load button inside Contact component", () => {
+  test("should render the Send Message button", () => {
     render(<Contact />);
-
-    const button = screen.getByRole("button");
-    // const button = screen.getByText('Random'); in this it gets failed because there is no text with Random in the button
-
-    // * Assertion
-    expect(button).toBeInTheDocument();
+    const btn = screen.getByRole("button", { name: /send message/i });
+    expect(btn).toBeInTheDocument();
   });
 
-  // * Note: test() or it() both are same
-
-  it("Should input name inside Contact component", () => {
+  test("should render the name input field", () => {
     render(<Contact />);
-
-    const inputName = screen.getByPlaceholderText("name");
-
-    // * Assertion
-    expect(inputName).toBeInTheDocument();
+    const nameInput = screen.getByPlaceholderText(/your name/i);
+    expect(nameInput).toBeInTheDocument();
   });
 
-  it("Should load 2 input boxes on the Contact component", () => {
+  test("should render at least 2 text input boxes", () => {
     render(<Contact />);
+    const textboxes = screen.getAllByRole("textbox");
+    expect(textboxes.length).toBeGreaterThanOrEqual(2);
+  });
 
-    // * Querying
-    const inputBoxes = screen.getAllByRole("textbox"); // getAllByRole - returns multiple elements
-
-    // console.log(inputBoxes.length); // returns jsx element
-
-    // * Assertion
-    // expect(inputBoxes.length).toBe(2);
-    expect(inputBoxes.length).not.toBe(3); // not here means inverse
+  test("should show success message after submitting valid form", () => {
+    render(<Contact />);
+    fireEvent.change(screen.getByPlaceholderText(/your name/i), {
+      target: { value: "Test User" },
+    });
+    fireEvent.change(screen.getByPlaceholderText(/your message/i), {
+      target: { value: "Hello there!" },
+    });
+    fireEvent.click(screen.getByRole("button", { name: /send message/i }));
+    expect(screen.getByText(/message sent/i)).toBeInTheDocument();
   });
 });

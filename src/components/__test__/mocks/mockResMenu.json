@@ -1,0 +1,106 @@
+{
+  "statusCode": 0,
+  "data": {
+    "cards": [
+      {
+        "card": {
+          "card": {
+            "@type": "type.googleapis.com/swiggy.gandalf.widgets.v2.TextBoxV2",
+            "text": "Wendy's Burgers"
+          }
+        }
+      },
+      {
+        "card": {
+          "card": {
+            "@type": "type.googleapis.com/swiggy.presentation.food.v2.Restaurant",
+            "info": {
+              "id": "358251",
+              "name": "Wendy's Burgers",
+              "cloudinaryImageId": "test_img",
+              "cuisines": ["Burgers", "American"],
+              "costForTwoMessage": "₹350 for two",
+              "avgRating": 4.4,
+              "sla": { "deliveryTime": 30 }
+            }
+          }
+        }
+      },
+      {
+        "card": { "card": { "@type": "type.googleapis.com/swiggy.gandalf.widgets.v2.RestaurantBlTab" } }
+      },
+      {
+        "card": { "card": { "@type": "type.googleapis.com/swiggy.gandalf.widgets.v2.GridWidget" } }
+      },
+      {
+        "groupedCard": {
+          "cardGroupMap": {
+            "REGULAR": {
+              "cards": [
+                {
+                  "card": {
+                    "card": {
+                      "@type": "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory",
+                      "title": "Recommended",
+                      "itemCards": [
+                        {
+                          "card": {
+                            "info": {
+                              "id": "item_001",
+                              "name": "Classic Burger",
+                              "price": 22900,
+                              "description": "A classic juicy burger",
+                              "imageId": "test_burger",
+                              "isVeg": 0,
+                              "itemAttribute": { "vegClassifier": "NONVEG" }
+                            }
+                          }
+                        },
+                        {
+                          "card": {
+                            "info": {
+                              "id": "item_002",
+                              "name": "Veggie Delight",
+                              "price": 18900,
+                              "description": "Fresh veggie burger",
+                              "imageId": "test_veggie",
+                              "isVeg": 1,
+                              "itemAttribute": { "vegClassifier": "VEG" }
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                },
+                {
+                  "card": {
+                    "card": {
+                      "@type": "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory",
+                      "title": "Sides & Drinks",
+                      "itemCards": [
+                        {
+                          "card": {
+                            "info": {
+                              "id": "item_003",
+                              "name": "Crispy Fries",
+                              "price": 8900,
+                              "description": "Golden crispy fries",
+                              "imageId": "test_fries",
+                              "isVeg": 1,
+                              "itemAttribute": { "vegClassifier": "VEG" }
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        }
+      }
+    ]
+  }
+}

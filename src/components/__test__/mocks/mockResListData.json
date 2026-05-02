@@ -1,0 +1,101 @@
+{
+  "data": {
+    "cards": [
+      {
+        "card": {
+          "card": {
+            "@type": "type.googleapis.com/swiggy.presentation.food.v2.Restaurant",
+            "info": {
+              "id": "100001",
+              "name": "Burger King",
+              "cloudinaryImageId": "img1",
+              "locality": "Sector 1",
+              "areaName": "Sector 1",
+              "costForTwo": "₹300 for two",
+              "cuisines": ["Burgers", "Fast Food"],
+              "avgRating": 4.5,
+              "promoted": false,
+              "sla": { "deliveryTime": 25 }
+            }
+          }
+        }
+      },
+      {
+        "card": {
+          "card": {
+            "@type": "type.googleapis.com/swiggy.presentation.food.v2.Restaurant",
+            "info": {
+              "id": "100002",
+              "name": "Pizza Hut",
+              "cloudinaryImageId": "img2",
+              "locality": "Sector 2",
+              "areaName": "Sector 2",
+              "costForTwo": "₹400 for two",
+              "cuisines": ["Pizza", "Italian"],
+              "avgRating": 3.8,
+              "promoted": false,
+              "sla": { "deliveryTime": 30 }
+            }
+          }
+        }
+      },
+      {
+        "card": {
+          "card": {
+            "@type": "type.googleapis.com/swiggy.presentation.food.v2.Restaurant",
+            "info": {
+              "id": "100003",
+              "name": "McDonald's",
+              "cloudinaryImageId": "img3",
+              "locality": "Sector 3",
+              "areaName": "Sector 3",
+              "costForTwo": "₹350 for two",
+              "cuisines": ["Burgers", "Beverages"],
+              "avgRating": 4.6,
+              "promoted": true,
+              "sla": { "deliveryTime": 20 }
+            }
+          }
+        }
+      },
+      {
+        "card": {
+          "card": {
+            "@type": "type.googleapis.com/swiggy.presentation.food.v2.Restaurant",
+            "info": {
+              "id": "100004",
+              "name": "Domino's Pizza",
+              "cloudinaryImageId": "img4",
+              "locality": "Sector 4",
+              "areaName": "Sector 4",
+              "costForTwo": "₹450 for two",
+              "cuisines": ["Pizza"],
+              "avgRating": 4.1,
+              "promoted": false,
+              "sla": { "deliveryTime": 35 }
+            }
+          }
+        }
+      },
+      {
+        "card": {
+          "card": {
+            "@type": "type.googleapis.com/swiggy.presentation.food.v2.Restaurant",
+            "info": {
+              "id": "100005",
+              "name": "KFC",
+              "cloudinaryImageId": "img5",
+              "locality": "Sector 5",
+              "areaName": "Sector 5",
+              "costForTwo": "₹380 for two",
+              "cuisines": ["Chicken", "Fast Food"],
+              "avgRating": 3.9,
+              "promoted": false,
+              "sla": { "deliveryTime": 28 }
+            }
+          }
+        }
+      }
+    ]
+  }
+}
