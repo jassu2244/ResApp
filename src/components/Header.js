@@ -37,17 +37,17 @@ const Header = () => {
     <header
       style={{
         position: "fixed",
-        top: "12px",
-        left: "16px",
-        right: "16px",
+        top: "10px",
+        left: "14px",
+        right: "14px",
         zIndex: 200,
         background: "var(--nav-bg)",
         backdropFilter: "blur(20px)",
         WebkitBackdropFilter: "blur(20px)",
-        borderRadius: "14px",
+        borderRadius: "12px",
         boxShadow: scrolled
-          ? "0 8px 40px rgba(0,0,0,0.14), 0 0 0 1px var(--border)"
-          : "0 2px 20px rgba(0,0,0,0.08), 0 0 0 1px var(--border)",
+          ? "0 6px 32px rgba(0,0,0,0.13), 0 0 0 1px var(--border)"
+          : "0 2px 16px rgba(0,0,0,0.07), 0 0 0 1px var(--border)",
         transition: "box-shadow 300ms ease",
       }}
     >
@@ -55,22 +55,22 @@ const Header = () => {
         style={{
           maxWidth: "1280px",
           margin: "0 auto",
-          padding: "0 20px",
-          height: "52px",
+          padding: "0 16px",
+          height: "44px",
           display: "flex",
           alignItems: "center",
         }}
       >
         <Link
           to="/"
-          style={{ display: "flex", alignItems: "center", gap: "6px", marginRight: "24px", flexShrink: 0 }}
+          style={{ display: "flex", alignItems: "center", gap: "5px", marginRight: "18px", flexShrink: 0 }}
         >
-          <span style={{ fontSize: "1.2rem" }}>🍽️</span>
+          <span style={{ fontSize: "1.05rem" }}>🍽️</span>
           <span
             style={{
               fontFamily: "var(--f-display)",
               fontWeight: 900,
-              fontSize: "1.22rem",
+              fontSize: "1.08rem",
               color: "var(--yellow)",
               letterSpacing: "-0.5px",
             }}
@@ -79,7 +79,7 @@ const Header = () => {
           </span>
         </Link>
 
-        <div style={{ width: "1px", height: "22px", background: "var(--border)", marginRight: "20px", flexShrink: 0 }} />
+        <div style={{ width: "1px", height: "18px", background: "var(--border)", marginRight: "16px", flexShrink: 0 }} />
 
         <nav style={{ display: "flex", alignItems: "center", gap: "2px", flex: 1 }}>
           {NAV_LINKS.map(({ to, label }) => {
@@ -91,10 +91,10 @@ const Header = () => {
                 style={{
                   fontFamily: "var(--f-body)",
                   fontWeight: active ? 700 : 500,
-                  fontSize: "0.88rem",
+                  fontSize: "0.82rem",
                   color: active ? "var(--text)" : "var(--text-muted)",
-                  padding: "5px 12px",
-                  borderRadius: "8px",
+                  padding: "4px 10px",
+                  borderRadius: "7px",
                   background: active ? "var(--surface-2)" : "transparent",
                   transition: "background 150ms ease, color 150ms ease",
                   whiteSpace: "nowrap",
@@ -123,8 +123,8 @@ const Header = () => {
             style={{
               display: "flex",
               alignItems: "center",
-              gap: "5px",
-              padding: "4px 9px",
+              gap: "4px",
+              padding: "3px 8px",
               borderRadius: "var(--r-pill)",
               background: "var(--surface-2)",
               border: "1px solid var(--border)",
@@ -132,8 +132,8 @@ const Header = () => {
           >
             <span
               style={{
-                width: "6px",
-                height: "6px",
+                width: "5px",
+                height: "5px",
                 borderRadius: "50%",
                 backgroundColor: onlineStatus ? "var(--green)" : "var(--red)",
                 display: "inline-block",
@@ -146,7 +146,7 @@ const Header = () => {
                 style={{
                   fontFamily: "var(--f-body)",
                   fontWeight: 600,
-                  fontSize: "0.78rem",
+                  fontSize: "0.73rem",
                   color: "var(--text-muted)",
                 }}
               >
@@ -160,13 +160,13 @@ const Header = () => {
             title="Toggle theme"
             aria-label="Toggle theme"
             style={{
-              width: "32px",
-              height: "32px",
+              width: "28px",
+              height: "28px",
               borderRadius: "var(--r-pill)",
               backgroundColor: "var(--surface-2)",
               border: "1px solid var(--border)",
               cursor: "pointer",
-              fontSize: "0.88rem",
+              fontSize: "0.78rem",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
@@ -187,7 +187,7 @@ const Header = () => {
                 display: "flex",
                 alignItems: "center",
                 gap: "6px",
-                padding: "7px 15px",
+                padding: "5px 12px",
                 backgroundColor: cartItems.length > 0 ? "var(--green)" : "var(--surface-2)",
                 color: cartItems.length > 0 ? "#000" : "var(--text-muted)",
                 border: cartItems.length > 0 ? "1.5px solid var(--green)" : "1.5px solid var(--border)",
@@ -195,7 +195,7 @@ const Header = () => {
                 cursor: "pointer",
                 fontFamily: "var(--f-display)",
                 fontWeight: 700,
-                fontSize: "0.82rem",
+                fontSize: "0.78rem",
                 transition: "all 200ms ease",
               }}
               onMouseEnter={(e) => {
