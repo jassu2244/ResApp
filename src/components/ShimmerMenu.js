@@ -1,62 +1,48 @@
-const ShimmerMenu = () => {
-  return (
-    <div style={{ backgroundColor: "var(--color-bg)", minHeight: "100vh" }}>
-      {/* Header shimmer */}
+const ShimmerMenu = () => (
+  <div style={{ background: "var(--bg)", minHeight: "100vh" }}>
+    {/* Header */}
+    <div style={{
+      background: "var(--surface)",
+      borderBottom: "1px solid var(--border)",
+      paddingTop: "100px",
+    }}>
       <div style={{
-        backgroundColor: "var(--color-surface)",
-        borderBottom: "1px solid var(--color-border)",
-        padding: "var(--spacing-xl) var(--spacing-lg)",
+        maxWidth: "900px", margin: "0 auto",
+        padding: "0 32px 40px",
+        display: "flex", gap: "32px", alignItems: "center",
       }}>
-        <div style={{
-          maxWidth: "900px",
-          margin: "0 auto",
-          display: "flex",
-          gap: "var(--spacing-xl)",
-          alignItems: "center",
-        }}>
-          <div className="shimmer-block" style={{
-            width: "140px",
-            height: "140px",
-            borderRadius: "var(--radius-md)",
-            flexShrink: 0,
-          }} />
-          <div style={{ flex: 1 }}>
-            <div className="shimmer-block" style={{ height: "36px", width: "60%", marginBottom: "12px" }} />
-            <div className="shimmer-block" style={{ height: "16px", width: "80%", marginBottom: "16px" }} />
-            <div style={{ display: "flex", gap: "8px" }}>
-              <div className="shimmer-block" style={{ height: "28px", width: "70px", borderRadius: "var(--radius-pill)" }} />
-              <div className="shimmer-block" style={{ height: "28px", width: "90px", borderRadius: "var(--radius-pill)" }} />
-              <div className="shimmer-block" style={{ height: "28px", width: "110px", borderRadius: "var(--radius-pill)" }} />
-            </div>
+        <div className="shimmer-elem" style={{ width: "130px", height: "130px", borderRadius: "var(--r-md)", flexShrink: 0 }} />
+        <div style={{ flex: 1 }}>
+          <div className="shimmer-elem" style={{ height: "36px", width: "55%", marginBottom: "12px" }} />
+          <div className="shimmer-elem" style={{ height: "16px", width: "75%", marginBottom: "16px" }} />
+          <div style={{ display: "flex", gap: "10px" }}>
+            {[70, 90, 110].map((w, i) => (
+              <div key={i} className="shimmer-elem" style={{ height: "28px", width: `${w}px`, borderRadius: "var(--r-pill)" }} />
+            ))}
           </div>
         </div>
       </div>
-
-      {/* Categories shimmer */}
-      <div style={{
-        maxWidth: "900px",
-        margin: "0 auto",
-        padding: "var(--spacing-xl) var(--spacing-lg)",
-      }}>
-        <div className="shimmer-block" style={{ height: "32px", width: "120px", marginBottom: "24px" }} />
-        {Array.from({ length: 5 }).map((_, i) => (
-          <div key={i} style={{
-            backgroundColor: "var(--color-surface)",
-            border: "1px solid var(--color-border)",
-            borderRadius: "var(--radius-md)",
-            marginBottom: "8px",
-            padding: "var(--spacing-md) var(--spacing-lg)",
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-          }}>
-            <div className="shimmer-block" style={{ height: "20px", width: `${160 + i * 30}px` }} />
-            <div className="shimmer-block" style={{ height: "18px", width: "18px", borderRadius: "4px" }} />
-          </div>
-        ))}
-      </div>
     </div>
-  );
-};
+    {/* Categories */}
+    <div style={{ maxWidth: "900px", margin: "0 auto", padding: "40px 32px" }}>
+      <div className="shimmer-elem" style={{ height: "28px", width: "100px", marginBottom: "24px" }} />
+      {Array.from({ length: 5 }).map((_, i) => (
+        <div key={i} style={{
+          background: "var(--surface)",
+          border: "1px solid var(--border-card)",
+          borderRadius: "var(--r-md)",
+          marginBottom: "10px",
+          padding: "16px 20px",
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+        }}>
+          <div className="shimmer-elem" style={{ height: "20px", width: `${150 + i * 25}px` }} />
+          <div className="shimmer-elem" style={{ height: "16px", width: "16px", borderRadius: "4px" }} />
+        </div>
+      ))}
+    </div>
+  </div>
+);
 
 export default ShimmerMenu;

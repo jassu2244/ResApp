@@ -1,7 +1,8 @@
 const express = require("express");
 const cors = require("cors");
-let fetch;
-(async () => { fetch = (await import("node-fetch")).default; })();
+const fetch = require("node-fetch");
+
+
 
 const app = express();
 const PORT = process.env.PORT || 3001;

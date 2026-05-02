@@ -27,36 +27,33 @@ const RestaurantMenu = () => {
     [];
 
   const categories = regularCards.filter(
-    (c) => c.card?.card?.["@type"] === "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory",
+    (c) => c.card?.card?.["@type"] === "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory"
   );
 
   return (
-    <div style={{
-      backgroundColor: "var(--color-bg)",
-      minHeight: "100vh",
-    }}>
-      {/* Restaurant Hero Header */}
+    <div style={{ background: "var(--bg)", minHeight: "100vh" }}>
+
+      {/* Restaurant hero header */}
       <div style={{
-        backgroundColor: "var(--color-surface)",
-        borderBottom: "1px solid var(--color-border)",
+        background: "var(--surface)",
+        borderBottom: "1px solid var(--border)",
+        paddingTop: "100px",
       }}>
         <div style={{
           maxWidth: "900px",
           margin: "0 auto",
-          padding: "var(--spacing-xl) var(--spacing-lg)",
+          padding: "0 32px 40px",
           display: "flex",
-          gap: "var(--spacing-xl)",
+          gap: "32px",
           alignItems: "center",
         }}>
-          {/* Restaurant image */}
           {cloudinaryImageId && (
             <div style={{
-              width: "140px",
-              height: "140px",
-              borderRadius: "var(--radius-md)",
+              width: "130px", height: "130px",
+              borderRadius: "var(--r-md)",
               overflow: "hidden",
               flexShrink: 0,
-              border: "1px solid var(--color-border)",
+              border: "1px solid var(--border-card)",
             }}>
               <img
                 src={CDN_URL + cloudinaryImageId}
@@ -67,64 +64,62 @@ const RestaurantMenu = () => {
             </div>
           )}
 
-          {/* Info */}
           <div style={{ flex: 1 }}>
             <h1 style={{
-              fontFamily: "var(--font-display)",
-              fontSize: "2rem",
-              color: "var(--color-text)",
+              fontFamily: "var(--f-display)",
+              fontWeight: 800,
+              fontSize: "2.2rem",
+              color: "var(--text)",
               letterSpacing: "-0.5px",
               marginBottom: "8px",
             }}>
               {name || "Restaurant Menu"}
             </h1>
             <p style={{
-              fontFamily: "var(--font-body)",
+              fontFamily: "var(--f-body)",
               fontSize: "0.9rem",
-              color: "var(--color-text-muted)",
-              marginBottom: "var(--spacing-md)",
+              color: "var(--text-muted)",
+              marginBottom: "16px",
             }}>
               {cuisines?.join(", ") || "Various cuisines"}
             </p>
-
-            {/* Stats chips */}
-            <div style={{ display: "flex", gap: "var(--spacing-sm)", flexWrap: "wrap" }}>
+            <div style={{ display: "flex", gap: "10px", flexWrap: "wrap" }}>
               {avgRating && (
                 <span style={{
-                  backgroundColor: "var(--color-primary)",
-                  color: "var(--color-bg)",
-                  fontFamily: "var(--font-mono)",
-                  fontWeight: 600,
+                  backgroundColor: "var(--yellow)",
+                  color: "#000",
+                  fontFamily: "var(--f-mono)",
+                  fontWeight: 700,
                   fontSize: "0.8rem",
                   padding: "4px 12px",
-                  borderRadius: "var(--radius-pill)",
+                  borderRadius: "var(--r-pill)",
                 }}>
                   ★ {avgRating}
                 </span>
               )}
               {deliveryTime && (
                 <span style={{
-                  backgroundColor: "var(--color-surface-2)",
-                  color: "var(--color-hot)",
-                  fontFamily: "var(--font-body)",
-                  fontWeight: 500,
+                  backgroundColor: "var(--surface-2)",
+                  color: "var(--red)",
+                  fontFamily: "var(--f-body)",
+                  fontWeight: 600,
                   fontSize: "0.8rem",
                   padding: "4px 12px",
-                  borderRadius: "var(--radius-pill)",
-                  border: "1px solid var(--color-border)",
+                  borderRadius: "var(--r-pill)",
+                  border: "1px solid var(--border)",
                 }}>
                   ⏱ {deliveryTime} min
                 </span>
               )}
               {costForTwoMessage && (
                 <span style={{
-                  backgroundColor: "var(--color-surface-2)",
-                  color: "var(--color-text-muted)",
-                  fontFamily: "var(--font-mono)",
+                  backgroundColor: "var(--surface-2)",
+                  color: "var(--text-muted)",
+                  fontFamily: "var(--f-mono)",
                   fontSize: "0.8rem",
                   padding: "4px 12px",
-                  borderRadius: "var(--radius-pill)",
-                  border: "1px solid var(--color-border)",
+                  borderRadius: "var(--r-pill)",
+                  border: "1px solid var(--border)",
                 }}>
                   {costForTwoMessage}
                 </span>
@@ -134,15 +129,11 @@ const RestaurantMenu = () => {
         </div>
       </div>
 
-      {/* Menu Categories */}
-      <div style={{
-        maxWidth: "900px",
-        margin: "0 auto",
-        padding: "var(--spacing-xl) var(--spacing-lg)",
-      }}>
+      {/* Menu */}
+      <div style={{ maxWidth: "900px", margin: "0 auto", padding: "40px 32px 80px" }}>
         {categories.length > 0 ? (
           <>
-            <h2 className="section-title" style={{ marginBottom: "var(--spacing-lg)" }}>Menu</h2>
+            <h2 className="section-title" style={{ fontSize: "1.6rem", marginBottom: "24px" }}>Menu</h2>
             {categories.map((category, index) => (
               <RestaurantCategory
                 key={category?.card?.card.title}
@@ -153,17 +144,13 @@ const RestaurantMenu = () => {
             ))}
           </>
         ) : (
-          <div style={{
-            textAlign: "center",
-            padding: "var(--spacing-2xl) 0",
-            color: "var(--color-text-muted)",
-          }}>
-            <span style={{ fontSize: "3rem", display: "block", marginBottom: "16px" }}>🍽️</span>
-            <p style={{ fontFamily: "var(--font-display)", fontSize: "1.5rem", color: "var(--color-text)", marginBottom: "8px" }}>
+          <div style={{ textAlign: "center", padding: "80px 0", color: "var(--text-muted)" }}>
+            <span style={{ fontSize: "4rem", display: "block", marginBottom: "16px" }}>🍽️</span>
+            <p style={{ fontFamily: "var(--f-display)", fontSize: "1.5rem", color: "var(--text)", marginBottom: "8px" }}>
               Menu unavailable
             </p>
-            <p style={{ fontFamily: "var(--font-body)", fontSize: "0.9rem" }}>
-              The Swiggy API may be blocking requests. Please try again later.
+            <p style={{ fontFamily: "var(--f-body)", fontSize: "0.9rem" }}>
+              Swiggy API is blocking requests from this location. Showing demo data where possible.
             </p>
           </div>
         )}

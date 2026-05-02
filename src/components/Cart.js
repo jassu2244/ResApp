@@ -7,8 +7,6 @@ const Cart = () => {
   const cartItems = useSelector((store) => store.cart.items);
   const dispatch = useDispatch();
 
-  const handleClearCart = () => dispatch(clearCart());
-
   const totalPrice = cartItems.reduce((sum, item) => {
     const price = item.card.info.price || item.card.info.defaultPrice || 0;
     return sum + price / 100;
@@ -16,123 +14,105 @@ const Cart = () => {
 
   return (
     <div style={{
-      backgroundColor: "var(--color-bg)",
+      background: "var(--bg)",
       minHeight: "100vh",
-      padding: "var(--spacing-xl) var(--spacing-lg)",
+      padding: "100px 60px 80px",
     }}>
-      <div style={{
-        maxWidth: "720px",
-        margin: "0 auto",
-      }}>
-        {/* Header */}
-        <div style={{ marginBottom: "var(--spacing-xl)" }}>
-          <h1 className="section-title">Your Cart</h1>
-        </div>
+      <div style={{ maxWidth: "760px", margin: "0 auto" }}>
+        <h1 style={{
+          fontFamily: "var(--f-display)",
+          fontWeight: 800,
+          fontSize: "2rem",
+          color: "var(--text)",
+          marginBottom: "8px",
+        }}>
+          Your Cart
+        </h1>
+        <div style={{ width: "44px", height: "3px", background: "var(--red)", borderRadius: "2px", marginBottom: "36px" }} />
 
         {cartItems.length === 0 ? (
           <div style={{
             textAlign: "center",
-            padding: "var(--spacing-2xl) 0",
-            color: "var(--color-text-muted)",
+            padding: "80px 0",
+            color: "var(--text-muted)",
           }}>
-            <span style={{ fontSize: "4rem", display: "block", marginBottom: "var(--spacing-md)" }}>🛒</span>
-            <p style={{
-              fontFamily: "var(--font-display)",
-              fontSize: "1.5rem",
-              color: "var(--color-text)",
-              marginBottom: "8px",
-            }}>
+            <span style={{ fontSize: "5rem", display: "block", marginBottom: "20px" }}>🛒</span>
+            <p style={{ fontFamily: "var(--f-display)", fontSize: "1.6rem", color: "var(--text)", marginBottom: "8px" }}>
               Your cart is empty
             </p>
-            <p style={{ fontFamily: "var(--font-body)", fontSize: "0.9rem" }}>
+            <p style={{ fontFamily: "var(--f-body)", fontSize: "0.95rem" }}>
               Add items from a restaurant to get started
             </p>
           </div>
         ) : (
           <div style={{
-            backgroundColor: "var(--color-surface)",
-            border: "1px solid var(--color-border)",
-            borderRadius: "var(--radius-lg)",
+            background: "var(--surface)",
+            border: "1px solid var(--border-card)",
+            borderRadius: "var(--r-lg)",
             overflow: "hidden",
           }}>
-            {/* Item list */}
             <ItemList items={cartItems} />
 
-            {/* Footer: total + actions */}
+            {/* Footer */}
             <div style={{
-              padding: "var(--spacing-lg)",
-              borderTop: "1px solid var(--color-border)",
+              padding: "24px",
+              borderTop: "1px solid var(--border)",
               display: "flex",
               flexDirection: "column",
-              gap: "var(--spacing-md)",
+              gap: "16px",
             }}>
-              {/* Total */}
-              <div style={{
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "center",
-              }}>
-                <span style={{
-                  fontFamily: "var(--font-body)",
-                  fontWeight: 600,
-                  fontSize: "1.1rem",
-                  color: "var(--color-text)",
-                }}>
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                <span style={{ fontFamily: "var(--f-body)", fontWeight: 700, fontSize: "1.15rem", color: "var(--text)" }}>
                   Total
                 </span>
-                <span style={{
-                  fontFamily: "var(--font-mono)",
-                  fontWeight: 600,
-                  fontSize: "1.3rem",
-                  color: "var(--color-primary)",
-                }}>
+                <span style={{ fontFamily: "var(--f-mono)", fontWeight: 700, fontSize: "1.4rem", color: "var(--green)" }}>
                   ₹{totalPrice.toFixed(2)}
                 </span>
               </div>
 
-              {/* Buttons */}
               <button
+                className="pulse-red"
                 style={{
                   width: "100%",
-                  padding: "14px",
-                  backgroundColor: "var(--color-hot)",
+                  padding: "16px",
+                  backgroundColor: "var(--red)",
                   color: "#fff",
                   border: "none",
-                  borderRadius: "var(--radius-md)",
-                  fontFamily: "var(--font-body)",
-                  fontWeight: 600,
+                  borderRadius: "var(--r-md)",
+                  fontFamily: "var(--f-display)",
+                  fontWeight: 700,
                   fontSize: "1rem",
                   cursor: "pointer",
-                  transition: "background-color 150ms ease",
+                  transition: "transform 150ms ease",
                 }}
-                onMouseEnter={(e) => e.currentTarget.style.backgroundColor = "var(--color-primary-dim)"}
-                onMouseLeave={(e) => e.currentTarget.style.backgroundColor = "var(--color-hot)"}
+                onMouseEnter={(e) => e.currentTarget.style.transform = "scale(1.02)"}
+                onMouseLeave={(e) => e.currentTarget.style.transform = "scale(1)"}
               >
                 Proceed to Checkout
               </button>
 
               <button
-                onClick={handleClearCart}
+                onClick={() => dispatch(clearCart())}
                 style={{
                   width: "100%",
-                  padding: "12px",
+                  padding: "13px",
                   backgroundColor: "transparent",
-                  color: "var(--color-text-muted)",
-                  border: "1px solid var(--color-border)",
-                  borderRadius: "var(--radius-md)",
-                  fontFamily: "var(--font-body)",
-                  fontWeight: 500,
+                  color: "var(--text-muted)",
+                  border: "1px solid var(--border)",
+                  borderRadius: "var(--r-md)",
+                  fontFamily: "var(--f-body)",
+                  fontWeight: 600,
                   fontSize: "0.9rem",
                   cursor: "pointer",
                   transition: "all 150ms ease",
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.borderColor = "var(--color-hot)";
-                  e.currentTarget.style.color = "var(--color-hot)";
+                  e.currentTarget.style.borderColor = "var(--red)";
+                  e.currentTarget.style.color = "var(--red)";
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.borderColor = "var(--color-border)";
-                  e.currentTarget.style.color = "var(--color-text-muted)";
+                  e.currentTarget.style.borderColor = "var(--border)";
+                  e.currentTarget.style.color = "var(--text-muted)";
                 }}
               >
                 🧹 Clear Cart
