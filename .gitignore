@@ -1,87 +1,35 @@
+# Dependencies
 node_modules/
 
-# Build outputs
-coverage/
-
-# Logs
-*.log
-
-# OS generated files
-.DS_Store
-Thumbs.db
-
-# Test coverage reports
-coverage-final.json
-clover.xml
-lcov.info
-lcov-report/
-
-# Misc
-*.tmp
-
-# Ignore parcel cache
-.parcel-cache/
-*.swp
-
-# IDE files
-.vscode/
-.idea/
-
-# Environment files
-.env
-.env.local
-
-# Ignore compiled files
-*.class
-
-# Ignore dist and build folders
+# Build output
 dist/
 build/
 
-# Ignore npm debug logs
-npm-debug.log*
+# Parcel cache
+.parcel-cache/
 
-# Ignore yarn logs
+# Test coverage
+coverage/
+
+# Environment variables
+.env
+.env.local
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+
+# Logs
+*.log
+npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-# Ignore package-lock and yarn.lock if not needed
-package-lock.json
-yarn.lock
-
-# Ignore test snapshots
-__snapshots__/
-
-# Ignore test output
-*.test.js.html
-
-# Ignore personal notes
-learn.txt
-Readme.txt
-
-# Ignore HTML coverage reports
-coverage/lcov-report/
-
-# Ignore mock data
-src/components/mocks/
-
-# Ignore temporary files
+# Misc
 *.tmp
 *.bak
-
-# Ignore any other unnecessary files
-# Add more patterns as needed
-coverage/
-coverage-final.json
-clover.xml
-lcov.info
-coverage/lcov-report/
-learn.txt
-Readme.txt
-src/components/mocks/
-*.log
-*.tmp
-*.bak
-*.swp
-*.DS_Store
-Thumbs.db

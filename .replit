@@ -22,10 +22,6 @@ args = "Start application"
 task = "workflow.run"
 args = "Backend API"
 
-[[workflows.workflow.tasks]]
-task = "workflow.run"
-args = "artifacts/mockup-sandbox: Component Preview Server"
-
 [[workflows.workflow]]
 name = "Start application"
 author = "agent"
@@ -49,18 +45,6 @@ waitForPort = 3001
 
 [workflows.workflow.metadata]
 outputType = "console"
-
-[[workflows.workflow]]
-name = "artifacts/mockup-sandbox: Component Preview Server"
-author = "agent"
-
-[workflows.workflow.metadata]
-outputType = "console"
-
-[[workflows.workflow.tasks]]
-task = "shell.exec"
-args = "cd artifacts/mockup-sandbox && PORT=8000 BASE_PATH=/__mockup/ npm run dev"
-waitForPort = 8000
 
 [[ports]]
 localPort = 3001
