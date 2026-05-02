@@ -1,64 +1,59 @@
-import React from "react";
-
 const ShimmerMenu = () => {
   return (
-    <div className="menu shimmer-menu">
-      <header className="menu-header shimmer-menu stroke animate">
-        <div className="menu-header-left shimmer-menu stroke animate">
-          <div className="stroke animate" style={{ width: "150px", height: "150px", backgroundColor: "#f0f0f0" }}></div>
-        </div>
-        <div className="menu-header-right shimmer-menu stroke animate">
-          <div className="top shimmer-menu stroke animate">
-            <h1></h1>
-            <h3></h3>
-          </div>
-          <div className="bottom shimmer-menu stroke animate">
-            <h4 className="avg-rating shimmer-menu stroke animate">
-              <span
-                className="icons shimmer-menu stroke animate"
-                style={{
-                  position: "relative",
-                  top: "2px",
-                  marginRight: "3px",
-                }}></span>
-              <span></span>
-            </h4>
-            <h4 className="time shimmer-menu stroke animate">
-              <span
-                className="icons stroke animate"
-                style={{
-                  position: "relative",
-                  top: "2px",
-                  marginRight: "3px",
-                }}></span>
-              <span> </span>
-            </h4>
-            <h3></h3>
-          </div>
-        </div>
-      </header>
-
-      <div className="menu-main shimmer-menu-main shimmer-menu stroke animate">
-        <h2></h2>
-        <h3 className="items shimmer-menu stroke animate"></h3>
-        <div className="menu-main-card-container shimmer-menu stroke animate">
-          <div className="menu-card shimmer-menu stroke animate">
-            <div className="menu-card-left shimmer-menu stroke animate">
-              <h2 className="menu-name shimmer-menu stroke animate"></h2>
-              <h3 className="menu-price shimmer-menu stroke animate"></h3>
-              <h4 className="menu-description shimmer-menu stroke animate"></h4>
-            </div>
-            <div className="menu-card-right shimmer-menu stroke animate">
-              <div
-                className="stroke animate"
-                style={{ width: "100px", height: "100px", backgroundColor: "#f0f0f0" }}></div>
+    <div style={{ backgroundColor: "var(--color-bg)", minHeight: "100vh" }}>
+      {/* Header shimmer */}
+      <div style={{
+        backgroundColor: "var(--color-surface)",
+        borderBottom: "1px solid var(--color-border)",
+        padding: "var(--spacing-xl) var(--spacing-lg)",
+      }}>
+        <div style={{
+          maxWidth: "900px",
+          margin: "0 auto",
+          display: "flex",
+          gap: "var(--spacing-xl)",
+          alignItems: "center",
+        }}>
+          <div className="shimmer-block" style={{
+            width: "140px",
+            height: "140px",
+            borderRadius: "var(--radius-md)",
+            flexShrink: 0,
+          }} />
+          <div style={{ flex: 1 }}>
+            <div className="shimmer-block" style={{ height: "36px", width: "60%", marginBottom: "12px" }} />
+            <div className="shimmer-block" style={{ height: "16px", width: "80%", marginBottom: "16px" }} />
+            <div style={{ display: "flex", gap: "8px" }}>
+              <div className="shimmer-block" style={{ height: "28px", width: "70px", borderRadius: "var(--radius-pill)" }} />
+              <div className="shimmer-block" style={{ height: "28px", width: "90px", borderRadius: "var(--radius-pill)" }} />
+              <div className="shimmer-block" style={{ height: "28px", width: "110px", borderRadius: "var(--radius-pill)" }} />
             </div>
           </div>
-
-          {/* <li>{itemCards[0].card.info.name}</li>
-        <li>{itemCards[1].card.info.name}</li>
-        <li>{itemCards[2].card.info.name}</li> */}
         </div>
+      </div>
+
+      {/* Categories shimmer */}
+      <div style={{
+        maxWidth: "900px",
+        margin: "0 auto",
+        padding: "var(--spacing-xl) var(--spacing-lg)",
+      }}>
+        <div className="shimmer-block" style={{ height: "32px", width: "120px", marginBottom: "24px" }} />
+        {Array.from({ length: 5 }).map((_, i) => (
+          <div key={i} style={{
+            backgroundColor: "var(--color-surface)",
+            border: "1px solid var(--color-border)",
+            borderRadius: "var(--radius-md)",
+            marginBottom: "8px",
+            padding: "var(--spacing-md) var(--spacing-lg)",
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}>
+            <div className="shimmer-block" style={{ height: "20px", width: `${160 + i * 30}px` }} />
+            <div className="shimmer-block" style={{ height: "18px", width: "18px", borderRadius: "4px" }} />
+          </div>
+        ))}
       </div>
     </div>
   );

@@ -1,0 +1,146 @@
+Redesign this React restaurant app (Swiggy clone) UI completely. Apply every rule below strictly.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+FONTS — load from Google Fonts
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+<link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+
+--font-display: 'Dela Gothic One'   → brand name, section headers
+--font-body:    'DM Sans'           → all body text, card titles
+--font-mono:    'JetBrains Mono'    → prices, cart count, ratings
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+CSS VARIABLES — paste in :root (dark default) and [data-theme="light"]
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+:root {
+  /* DARK THEME (default) */
+  --color-bg:         #0F0D0B;
+  --color-surface:    #1A1714;
+  --color-surface-2:  #231F1A;
+  --color-primary:    #F4A623;
+  --color-primary-dim:#C4821A;
+  --color-hot:        #E8421A;
+  --color-fresh:      #5BB57A;
+  --color-text:       #F5EFE6;
+  --color-text-muted: #8A7E70;
+  --color-border:     #2E2820;
+  --color-shimmer-1:  #1E1B17;
+  --color-shimmer-2:  #2A2520;
+
+  --font-display: 'Dela Gothic One', cursive;
+  --font-body:    'DM Sans', sans-serif;
+  --font-mono:    'JetBrains Mono', monospace;
+
+  --radius-sm:   6px;
+  --radius-md:   12px;
+  --radius-lg:   20px;
+  --radius-pill: 999px;
+}
+
+[data-theme="light"] {
+  --color-bg:         #FAF6F1;
+  --color-surface:    #FFFFFF;
+  --color-surface-2:  #F2EDE6;
+  --color-primary:    #C97B2B;
+  --color-primary-dim:#A86220;
+  --color-hot:        #D94418;
+  --color-fresh:      #3D9A60;
+  --color-text:       #1F1A14;
+  --color-text-muted: #7A6E63;
+  --color-border:     #E4DDD4;
+  --color-shimmer-1:  #EDE8E1;
+  --color-shimmer-2:  #F7F3EE;
+}
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+THEME TOGGLE — in Header.js
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+- On app load: read localStorage.getItem('theme') → set data-theme on <html>
+- Toggle button: sun/moon icon, small pill shape, right side of navbar
+- On click: flip data-theme between 'dark' and 'light', save to localStorage
+- Button style: background var(--color-surface-2), icon color var(--color-text-muted)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+HEADER
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+- Background: var(--color-bg), border-bottom: 1px solid var(--color-border)
+- NO box-shadow on navbar
+- Logo text: Dela Gothic One font, color var(--color-primary)
+- Search input: background var(--color-surface-2), border 1px solid var(--color-border), focus ring 2px solid var(--color-primary), font DM Sans
+- Cart button: background var(--color-hot), white text, JetBrains Mono for item count, border-radius var(--radius-pill)
+- Theme toggle pill: next to cart
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+RESTAURANT CARDS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+- Background: var(--color-surface)
+- Border: 1px solid var(--color-border), border-radius: var(--radius-md)
+- Default state: NO box-shadow
+- Hover: border-color → var(--color-primary), transform: translateY(-4px), transition: all 200ms ease-out
+- Light mode hover only: box-shadow: 0 4px 20px rgba(0,0,0,0.07)
+- Image wrapper: overflow hidden, border-radius top only
+- Image on hover: transform scale(1.03), transition 200ms ease-out
+- Rating chip: position top-right of image, background var(--color-primary), color var(--color-bg), font JetBrains Mono, font-size 0.75rem, padding 2px 8px, border-radius var(--radius-sm)
+- Card title: DM Sans 600, color var(--color-text)
+- Cuisine / meta text: DM Sans 400, color var(--color-text-muted), font-size 0.85rem
+- Delivery time: color var(--color-hot), font DM Sans 500
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+BODY / MAIN PAGE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+- Background: var(--color-bg)
+- Card grid: repeat(auto-fill, minmax(280px, 1fr)), gap 24px
+- Section titles: Dela Gothic One, color var(--color-text), LEFT-aligned (never centered)
+- Section title decoration: after pseudo-element, 3px tall, 40px wide, background var(--color-primary), display block, margin-top 6px
+- Cards fade in on load: staggered animation-delay calc(index * 60ms), keyframe fadeInUp (translateY 16px → 0, opacity 0 → 1)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+SHIMMER / SKELETON LOADING
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+- No gray shimmer. Use CSS variables:
+  background: linear-gradient(90deg, var(--color-shimmer-1), var(--color-shimmer-2), var(--color-shimmer-1))
+  background-size: 200% 100%
+  animation: shimmer 1.4s infinite linear
+- Shimmer cards must match exact shape/size of real restaurant cards
+- @keyframes shimmer { 0% { background-position: 200% 0 } 100% { background-position: -200% 0 } }
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+CART PAGE / SIDEBAR
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+- Background: var(--color-surface)
+- Item name: DM Sans 600, color var(--color-text)
+- Item price: JetBrains Mono 600, color var(--color-primary)
+- Quantity controls: border 1px solid var(--color-primary), color var(--color-primary), border-radius var(--radius-sm)
+- Divider between items: 1px solid var(--color-border)
+- Total row: DM Sans 600, price in JetBrains Mono, color var(--color-primary), larger font-size
+- Checkout button: full-width, background var(--color-hot), color white, DM Sans 600, border-radius var(--radius-md), padding 14px
+- Checkout button hover: background var(--color-primary-dim), transition 150ms
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+MENU PAGE (RestaurantMenu)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+- Layout: left side text (name, desc, price), right side small thumbnail image
+- Item name: DM Sans 600, color var(--color-text)
+- Description: DM Sans 400, color var(--color-text-muted), font-size 0.85rem
+- Price: JetBrains Mono 600, color var(--color-primary)
+- Add button default: outlined — border 1.5px solid var(--color-primary), color var(--color-primary), background transparent
+- Add button active/added: background var(--color-primary), color var(--color-bg)
+- Add button click: transform scale(0.95) then back, transition 100ms
+- Veg badge: green square outline + green dot, color var(--color-fresh)
+- Non-veg badge: #A0522D square outline + dot
+- Divider between items: 1px solid var(--color-border)
+- Category headers: DM Sans 600, color var(--color-text), font-size 1.1rem, border-bottom 1px solid var(--color-border)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+STRICTLY FORBIDDEN — reject these if they appear
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+✗ Inter, Roboto, Arial, system-ui as fonts
+✗ Pure white (#FFFFFF) as page background
+✗ Pure black (#000000) as background
+✗ Purple, blue, or teal as primary accent
+✗ Box-shadows as the default card style (hover only in light mode)
+✗ Centered section headers
+✗ Gray shimmer skeletons
+✗ Generic green or blue CTA buttons
+✗ Hardcoded color values — use CSS variables everywhere
