@@ -33,3 +33,11 @@ yarn-error.log*
 # Misc
 *.tmp
 *.bak
+
+# Local tooling artifacts
+.local/
+.agents/
+.config/
+
+# Design reference assets
+attached_assets/
