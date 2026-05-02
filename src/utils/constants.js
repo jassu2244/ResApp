@@ -2,4 +2,4 @@ export const CDN_URL = "https://media-assets.swiggy.com/swiggy/image/upload/fl_l
 
 export const LOGO_URL = "https://cdn-icons-png.flaticon.com/128/3655/3655682.png";
 
-export const MENU_API = "http://localhost:3001/api/menu/";
+export const MENU_API = "/api/menu/";
