@@ -3,6 +3,8 @@ import Body from "../Body";
 import MOCK_DATA from "./mocks/mockResListData.json";
 import { act } from "react-dom/test-utils";
 import { BrowserRouter } from "react-router-dom";
+import { Provider } from "react-redux";
+import appStore from "../../utils/appStore";
 import "@testing-library/jest-dom";
 
 global.fetch = jest.fn(() =>
@@ -12,7 +14,15 @@ global.fetch = jest.fn(() =>
 );
 
 const renderBody = () =>
-  act(async () => render(<BrowserRouter><Body /></BrowserRouter>));
+  act(async () =>
+    render(
+      <Provider store={appStore}>
+        <BrowserRouter>
+          <Body />
+        </BrowserRouter>
+      </Provider>
+    )
+  );
 
 describe("Search & Filter — Integration Tests", () => {
   it("should render 5 restaurant cards on initial load", async () => {

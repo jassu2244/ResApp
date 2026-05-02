@@ -1,8 +1,15 @@
 import { useState, useEffect, useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus";
 import UserContext from "../utils/UserContext";
 import { useSelector } from "react-redux";
+
+const NAV_LINKS = [
+  { to: "/", label: "Home" },
+  { to: "/about", label: "About" },
+  { to: "/contact", label: "Contact" },
+  { to: "/grocery", label: "Grocery" },
+];
 
 const Header = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -10,6 +17,7 @@ const Header = () => {
     () => localStorage.getItem("theme") || "light"
   );
 
+  const location = useLocation();
   const onlineStatus = useOnlineStatus();
   const { loggedInUser } = useContext(UserContext);
   const cartItems = useSelector((store) => store.cart.items);
@@ -20,36 +28,56 @@ const Header = () => {
   }, [theme]);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 40);
+    const onScroll = () => setScrolled(window.scrollY > 10);
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   const toggleTheme = () => setTheme((t) => (t === "dark" ? "light" : "dark"));
-
   const isDark = theme === "dark";
 
   return (
-    <header className={`header${scrolled ? " header--scrolled" : ""}`}>
+    <header
+      style={{
+        position: "fixed",
+        top: 0,
+        left: 0,
+        right: 0,
+        zIndex: 200,
+        background: "var(--surface)",
+        borderBottom: "1px solid var(--border)",
+        boxShadow: scrolled ? "0 2px 24px rgba(0,0,0,0.10)" : "none",
+        transition: "box-shadow 300ms ease",
+      }}
+    >
       <div
         style={{
           maxWidth: "1280px",
           margin: "0 auto",
-          padding: "0 32px",
-          height: "68px",
+          padding: "0 28px",
+          height: "64px",
           display: "flex",
           alignItems: "center",
-          justifyContent: "space-between",
-          gap: "20px",
+          gap: "0",
         }}
       >
-        {/* Logo */}
-        <Link to="/">
+        {/* ── Logo ── */}
+        <Link
+          to="/"
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: "6px",
+            marginRight: "32px",
+            flexShrink: 0,
+          }}
+        >
+          <span style={{ fontSize: "1.4rem" }}>🍽️</span>
           <span
             style={{
               fontFamily: "var(--f-display)",
               fontWeight: 900,
-              fontSize: "1.55rem",
+              fontSize: "1.35rem",
               color: "var(--yellow)",
               letterSpacing: "-0.5px",
             }}
@@ -58,58 +86,107 @@ const Header = () => {
           </span>
         </Link>
 
-        {/* Nav */}
-        <nav style={{ display: "flex", alignItems: "center", gap: "24px" }}>
-          {[
-            { to: "/", label: "Home" },
-            { to: "/about", label: "About" },
-            { to: "/contact", label: "Contact" },
-            { to: "/grocery", label: "Grocery" },
-          ].map(({ to, label }) => (
-            <Link
-              key={to}
-              to={to}
-              style={{
-                fontFamily: "var(--f-body)",
-                fontWeight: 600,
-                fontSize: "0.92rem",
-                color: "var(--text-muted)",
-                transition: "color 150ms ease",
-              }}
-              onMouseEnter={(e) => (e.target.style.color = "var(--text)")}
-              onMouseLeave={(e) => (e.target.style.color = "var(--text-muted)")}
-            >
-              {label}
-            </Link>
-          ))}
+        {/* ── Divider ── */}
+        <div
+          style={{
+            width: "1px",
+            height: "28px",
+            background: "var(--border)",
+            marginRight: "28px",
+            flexShrink: 0,
+          }}
+        />
+
+        {/* ── Nav links ── */}
+        <nav
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: "4px",
+            flex: 1,
+          }}
+        >
+          {NAV_LINKS.map(({ to, label }) => {
+            const active = location.pathname === to;
+            return (
+              <Link
+                key={to}
+                to={to}
+                style={{
+                  fontFamily: "var(--f-body)",
+                  fontWeight: active ? 700 : 600,
+                  fontSize: "0.9rem",
+                  color: active ? "var(--text)" : "var(--text-muted)",
+                  padding: "6px 14px",
+                  borderRadius: "var(--r-sm)",
+                  background: active ? "var(--surface-2)" : "transparent",
+                  transition: "background 150ms ease, color 150ms ease",
+                  whiteSpace: "nowrap",
+                }}
+                onMouseEnter={(e) => {
+                  if (!active) {
+                    e.currentTarget.style.background = "var(--surface-2)";
+                    e.currentTarget.style.color = "var(--text)";
+                  }
+                }}
+                onMouseLeave={(e) => {
+                  if (!active) {
+                    e.currentTarget.style.background = "transparent";
+                    e.currentTarget.style.color = "var(--text-muted)";
+                  }
+                }}
+              >
+                {label}
+              </Link>
+            );
+          })}
         </nav>
 
-        {/* Right */}
-        <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-          {/* Online indicator */}
-          <span
+        {/* ── Right actions ── */}
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: "8px",
+            flexShrink: 0,
+          }}
+        >
+          {/* Online dot + user */}
+          <div
             style={{
-              width: "8px",
-              height: "8px",
-              borderRadius: "50%",
-              backgroundColor: onlineStatus ? "var(--green)" : "var(--red)",
-              display: "inline-block",
-              flexShrink: 0,
+              display: "flex",
+              alignItems: "center",
+              gap: "6px",
+              padding: "5px 10px",
+              borderRadius: "var(--r-pill)",
+              background: "var(--surface-2)",
+              border: "1px solid var(--border)",
             }}
-            title={onlineStatus ? "Online" : "Offline"}
-          />
-
-          {loggedInUser && (
+          >
             <span
               style={{
-                fontFamily: "var(--f-body)",
-                fontSize: "0.82rem",
-                color: "var(--text-muted)",
+                width: "7px",
+                height: "7px",
+                borderRadius: "50%",
+                backgroundColor: onlineStatus ? "var(--green)" : "var(--red)",
+                display: "inline-block",
+                flexShrink: 0,
               }}
-            >
-              {loggedInUser}
-            </span>
-          )}
+              title={onlineStatus ? "Online" : "Offline"}
+            />
+            {loggedInUser && (
+              <span
+                style={{
+                  fontFamily: "var(--f-body)",
+                  fontWeight: 600,
+                  fontSize: "0.82rem",
+                  color: "var(--text-muted)",
+                }}
+              >
+                {loggedInUser}
+              </span>
+            )}
+          </div>
 
           {/* Theme toggle */}
           <button
@@ -117,31 +194,32 @@ const Header = () => {
             title="Toggle theme"
             aria-label="Toggle theme"
             style={{
-              width: "34px",
-              height: "34px",
+              width: "36px",
+              height: "36px",
               borderRadius: "var(--r-pill)",
               backgroundColor: "var(--surface-2)",
               border: "1px solid var(--border)",
               cursor: "pointer",
-              fontSize: "0.95rem",
+              fontSize: "1rem",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
               flexShrink: 0,
-              transition: "border-color 150ms ease",
+              transition: "border-color 150ms ease, background 150ms ease",
             }}
-            onMouseEnter={(e) =>
-              (e.currentTarget.style.borderColor = "var(--yellow)")
-            }
-            onMouseLeave={(e) =>
-              (e.currentTarget.style.borderColor = "var(--border)")
-            }
+            onMouseEnter={(e) => {
+              e.currentTarget.style.borderColor = "var(--yellow)";
+              e.currentTarget.style.background = "var(--surface-2)";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.borderColor = "var(--border)";
+            }}
           >
             {isDark ? "☀️" : "🌙"}
           </button>
 
-          {/* Cart */}
-          <Link to="/cart">
+          {/* Cart button */}
+          <Link to="/cart" style={{ textDecoration: "none" }}>
             <button
               aria-label={`Cart ${cartItems.length} items`}
               style={{
@@ -149,30 +227,51 @@ const Header = () => {
                 display: "flex",
                 alignItems: "center",
                 gap: "7px",
-                padding: "9px 18px",
-                backgroundColor: "var(--green)",
-                color: "#000",
-                border: "none",
+                padding: "8px 18px",
+                backgroundColor: cartItems.length > 0 ? "var(--green)" : "var(--surface-2)",
+                color: cartItems.length > 0 ? "#000" : "var(--text-muted)",
+                border: cartItems.length > 0
+                  ? "1.5px solid var(--green)"
+                  : "1.5px solid var(--border)",
                 borderRadius: "var(--r-pill)",
                 cursor: "pointer",
                 fontFamily: "var(--f-display)",
                 fontWeight: 700,
                 fontSize: "0.88rem",
-                transition: "box-shadow 200ms ease",
+                transition: "all 200ms ease",
               }}
-              onMouseEnter={(e) =>
-                (e.currentTarget.style.boxShadow =
-                  "0 0 18px var(--green-glow)")
-              }
-              onMouseLeave={(e) =>
-                (e.currentTarget.style.boxShadow = "none")
-              }
+              onMouseEnter={(e) => {
+                if (cartItems.length === 0) {
+                  e.currentTarget.style.borderColor = "var(--green)";
+                  e.currentTarget.style.color = "var(--green)";
+                } else {
+                  e.currentTarget.style.boxShadow = "0 4px 16px var(--green-glow)";
+                }
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.borderColor = cartItems.length > 0
+                  ? "var(--green)"
+                  : "var(--border)";
+                e.currentTarget.style.color = cartItems.length > 0
+                  ? "#000"
+                  : "var(--text-muted)";
+                e.currentTarget.style.boxShadow = "none";
+              }}
             >
               🛒
-              <span style={{ fontFamily: "var(--f-mono)", fontWeight: 700 }}>
+              <span
+                style={{
+                  fontFamily: "var(--f-mono)",
+                  fontWeight: 700,
+                  minWidth: "14px",
+                  textAlign: "center",
+                }}
+              >
                 {cartItems.length}
               </span>
               <span>Cart</span>
+
+              {/* Bubble badge on non-zero */}
               {cartItems.length > 0 && (
                 <span
                   key={cartItems.length}
@@ -190,7 +289,7 @@ const Header = () => {
                     alignItems: "center",
                     justifyContent: "center",
                     fontFamily: "var(--f-mono)",
-                    fontSize: "0.65rem",
+                    fontSize: "0.62rem",
                     fontWeight: 700,
                   }}
                 >

@@ -79,7 +79,6 @@ a { text-decoration: none; color: inherit; }
 .anim-4   { animation: fadeUp 0.45s 0.46s both; }
 .anim-img { animation: fadeUp 0.6s  0.10s both; }
 
-/* Only 2 float elements for perf */
 .float-hero { animation: floatY 4s ease-in-out infinite; will-change: transform; }
 .float-dot  { animation: floatY 6s ease-in-out 1s infinite; will-change: transform; }
 
@@ -105,7 +104,7 @@ a { text-decoration: none; color: inherit; }
   grid-template-columns: 1fr 1fr;
   align-items: center;
   background: radial-gradient(ellipse at 80% 50%, #2a0a0a 0%, #0A0A0A 60%);
-  padding-top: 80px;
+  padding-top: 64px;
   position: relative;
   overflow: hidden;
 }
@@ -130,28 +129,20 @@ a { text-decoration: none; color: inherit; }
   border-radius: 2px;
 }
 
-/* ── Header ─────────────────────────────────────── */
+/* ── Header — always solid, Swiggy-inspired ─────── */
 .header {
   position: fixed;
   top: 0; left: 0; right: 0;
   z-index: 200;
-  transition: background 300ms ease, backdrop-filter 300ms ease, border-color 300ms ease;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  transition: box-shadow 300ms ease;
 }
-
-/* Very light blur glass on scroll — dark theme */
 .header--scrolled {
-  background: rgba(10, 10, 10, 0.30);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border-bottom: 1px solid rgba(255,255,255,0.05);
+  box-shadow: 0 2px 24px rgba(0,0,0,0.12);
 }
-
-/* Very light blur glass on scroll — light theme (cream tinted) */
 [data-theme="light"] .header--scrolled {
-  background: rgba(245, 240, 232, 0.55);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border-bottom: 1px solid rgba(0,0,0,0.05);
+  box-shadow: 0 2px 24px rgba(0,0,0,0.07);
 }
 
 /* ── Scrollbar ──────────────────────────────────── */
