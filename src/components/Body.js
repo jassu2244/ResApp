@@ -184,7 +184,6 @@ const Body = () => {
   return (
     <div style={{ background: "var(--bg)" }}>
 
-      {/* ── HERO — full-width background, 1280px content ── */}
       <div className="hero-bg">
         <div className="hero" style={{ maxWidth: "1280px", margin: "0 auto", padding: "0 64px 60px" }}>
 

@@ -1,20 +1,16 @@
-import React, { lazy, Suspense } from "react";
-import { useState } from "react";
-import { useEffect } from "react";
+import React, { lazy, Suspense, useState, useEffect } from "react";
 import ReactDOM from "react-dom/client";
+import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
+import { Provider } from "react-redux";
 
 import Header from "./components/Header";
 import Body from "./components/Body";
-// import Footer from './components/Footer';
-// import About from './components/About';
 import Contact from "./components/Contact";
 import Error from "./components/Error";
 import RestaurantMenu from "./components/RestaurantMenu";
-import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
-import UserContext from "./utils/UserContext";
-import { Provider } from "react-redux";
-import appStore from "./utils/appStore";
 import Cart from "./components/Cart";
+import UserContext from "./utils/UserContext";
+import appStore from "./utils/appStore";
 
 const Grocery = lazy(() => import("./components/Grocery"));
 const About = lazy(() => import("./components/About"));
@@ -22,13 +18,8 @@ const About = lazy(() => import("./components/About"));
 const AppLayout = () => {
   const [userName, setUserName] = useState();
 
-  // Authentication
   useEffect(() => {
-    // Make an API call and send username and password
-    const data = {
-      name: "Jasmeet",
-    };
-    setUserName(data.name);
+    setUserName("Jasmeet");
   }, []);
 
   return (
@@ -43,27 +34,13 @@ const AppLayout = () => {
   );
 };
 
-// // Default User
-// <UserContext.Provider value={{ loggedInUser: userName }}>
-//   {/* Vas K */}
-//   <div className="app">
-//     <UserContext.Provider value={{ loggedInUser: 'John Cena' }}>
-//       {/* John Cena */}
-//       <Header />
-//     </UserContext.Provider>
-//     <Outlet />
-//   </div>
-// </UserContext.Provider>
-
 const appRouter = createBrowserRouter([
   {
     path: "/",
     element: <AppLayout />,
+    errorElement: <Error />,
     children: [
-      {
-        path: "/",
-        element: <Body />,
-      },
+      { path: "/", element: <Body /> },
       {
         path: "/about",
         element: (
@@ -72,10 +49,7 @@ const appRouter = createBrowserRouter([
           </Suspense>
         ),
       },
-      {
-        path: "/contact",
-        element: <Contact />,
-      },
+      { path: "/contact", element: <Contact /> },
       {
         path: "/grocery",
         element: (
@@ -84,19 +58,11 @@ const appRouter = createBrowserRouter([
           </Suspense>
         ),
       },
-      {
-        path: "/restaurants/:resId",
-        element: <RestaurantMenu />,
-      },
-      {
-        path: "/cart",
-        element: <Cart />,
-      },
+      { path: "/restaurants/:resId", element: <RestaurantMenu /> },
+      { path: "/cart", element: <Cart /> },
     ],
-    errorElement: <Error />,
   },
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
-
 root.render(<RouterProvider router={appRouter} />);

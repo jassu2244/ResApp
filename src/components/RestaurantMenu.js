@@ -33,28 +33,10 @@ const RestaurantMenu = () => {
   return (
     <div style={{ background: "var(--bg)", minHeight: "100vh" }}>
 
-      {/* Restaurant hero header */}
-      <div style={{
-        background: "var(--surface)",
-        borderBottom: "1px solid var(--border)",
-        paddingTop: "100px",
-      }}>
-        <div style={{
-          maxWidth: "900px",
-          margin: "0 auto",
-          padding: "0 32px 40px",
-          display: "flex",
-          gap: "32px",
-          alignItems: "center",
-        }}>
+      <div style={{ background: "var(--surface)", borderBottom: "1px solid var(--border)", paddingTop: "100px" }}>
+        <div style={{ maxWidth: "900px", margin: "0 auto", padding: "0 32px 40px", display: "flex", gap: "32px", alignItems: "center" }}>
           {cloudinaryImageId && (
-            <div style={{
-              width: "130px", height: "130px",
-              borderRadius: "var(--r-md)",
-              overflow: "hidden",
-              flexShrink: 0,
-              border: "1px solid var(--border-card)",
-            }}>
+            <div style={{ width: "130px", height: "130px", borderRadius: "var(--r-md)", overflow: "hidden", flexShrink: 0, border: "1px solid var(--border-card)" }}>
               <img
                 src={CDN_URL + cloudinaryImageId}
                 alt={name}
@@ -65,62 +47,25 @@ const RestaurantMenu = () => {
           )}
 
           <div style={{ flex: 1 }}>
-            <h1 style={{
-              fontFamily: "var(--f-display)",
-              fontWeight: 800,
-              fontSize: "2.2rem",
-              color: "var(--text)",
-              letterSpacing: "-0.5px",
-              marginBottom: "8px",
-            }}>
+            <h1 style={{ fontFamily: "var(--f-display)", fontWeight: 800, fontSize: "2.2rem", color: "var(--text)", letterSpacing: "-0.5px", marginBottom: "8px" }}>
               {name || "Restaurant Menu"}
             </h1>
-            <p style={{
-              fontFamily: "var(--f-body)",
-              fontSize: "0.9rem",
-              color: "var(--text-muted)",
-              marginBottom: "16px",
-            }}>
+            <p style={{ fontFamily: "var(--f-body)", fontSize: "0.9rem", color: "var(--text-muted)", marginBottom: "16px" }}>
               {cuisines?.join(", ") || "Various cuisines"}
             </p>
             <div style={{ display: "flex", gap: "10px", flexWrap: "wrap" }}>
               {avgRating && (
-                <span style={{
-                  backgroundColor: "var(--yellow)",
-                  color: "#000",
-                  fontFamily: "var(--f-mono)",
-                  fontWeight: 700,
-                  fontSize: "0.8rem",
-                  padding: "4px 12px",
-                  borderRadius: "var(--r-pill)",
-                }}>
+                <span style={{ backgroundColor: "var(--yellow)", color: "#000", fontFamily: "var(--f-mono)", fontWeight: 700, fontSize: "0.8rem", padding: "4px 12px", borderRadius: "var(--r-pill)" }}>
                   ★ {avgRating}
                 </span>
               )}
               {deliveryTime && (
-                <span style={{
-                  backgroundColor: "var(--surface-2)",
-                  color: "var(--red)",
-                  fontFamily: "var(--f-body)",
-                  fontWeight: 600,
-                  fontSize: "0.8rem",
-                  padding: "4px 12px",
-                  borderRadius: "var(--r-pill)",
-                  border: "1px solid var(--border)",
-                }}>
+                <span style={{ backgroundColor: "var(--surface-2)", color: "var(--red)", fontFamily: "var(--f-body)", fontWeight: 600, fontSize: "0.8rem", padding: "4px 12px", borderRadius: "var(--r-pill)", border: "1px solid var(--border)" }}>
                   ⏱ {deliveryTime} min
                 </span>
               )}
               {costForTwoMessage && (
-                <span style={{
-                  backgroundColor: "var(--surface-2)",
-                  color: "var(--text-muted)",
-                  fontFamily: "var(--f-mono)",
-                  fontSize: "0.8rem",
-                  padding: "4px 12px",
-                  borderRadius: "var(--r-pill)",
-                  border: "1px solid var(--border)",
-                }}>
+                <span style={{ backgroundColor: "var(--surface-2)", color: "var(--text-muted)", fontFamily: "var(--f-mono)", fontSize: "0.8rem", padding: "4px 12px", borderRadius: "var(--r-pill)", border: "1px solid var(--border)" }}>
                   {costForTwoMessage}
                 </span>
               )}
@@ -129,7 +74,6 @@ const RestaurantMenu = () => {
         </div>
       </div>
 
-      {/* Menu */}
       <div style={{ maxWidth: "900px", margin: "0 auto", padding: "40px 32px 80px" }}>
         {categories.length > 0 ? (
           <>
