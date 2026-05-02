@@ -38,8 +38,9 @@ const Header = () => {
       style={{
         position: "fixed",
         top: "10px",
-        left: "20px",
-        right: "20px",
+        left: "50%",
+        transform: "translateX(-50%)",
+        width: "min(calc(100% - 40px), 1280px)",
         zIndex: 200,
         background: "var(--nav-bg)",
         backdropFilter: "blur(20px)",
