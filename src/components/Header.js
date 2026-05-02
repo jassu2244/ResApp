@@ -38,8 +38,10 @@ const Header = () => {
       style={{
         position: "fixed",
         top: "10px",
-        left: "14px",
-        right: "14px",
+        left: "50%",
+        transform: "translateX(-50%)",
+        width: "calc(100% - 32px)",
+        maxWidth: "1040px",
         zIndex: 200,
         background: "var(--nav-bg)",
         backdropFilter: "blur(20px)",
@@ -53,8 +55,6 @@ const Header = () => {
     >
       <div
         style={{
-          maxWidth: "1280px",
-          margin: "0 auto",
           padding: "0 16px",
           height: "44px",
           display: "flex",
