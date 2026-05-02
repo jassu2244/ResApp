@@ -152,6 +152,21 @@ a { text-decoration: none; color: inherit; }
   background-size: 200% 100%;
 }
 
+/* Glass pills — hero floating cards */
+.glass-pill {
+  background: rgba(255, 255, 255, 0.07);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+}
+[data-theme="light"] .glass-pill {
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.09);
+}
+
 /* Hero */
 .hero-bg {
   background: radial-gradient(ellipse at 80% 50%, #2a0a0a 0%, #0A0A0A 60%);

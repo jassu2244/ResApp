@@ -220,51 +220,49 @@ const Body = () => {
           {/* Right: animated hero visual */}
           <div style={{ position: "relative", display: "flex", alignItems: "center", justifyContent: "center" }}>
 
-            {/* Pulsing red glow halo behind circle */}
-            <div className="pulse-glow" style={{ position: "absolute", width: "460px", height: "460px", borderRadius: "50%", background: "radial-gradient(circle, rgba(232,35,26,0.13) 0%, transparent 65%)", pointerEvents: "none" }} />
-
-            {/* Spinning dashed red ring */}
-            <div className="spin-ring" style={{ position: "absolute", width: "432px", height: "432px", borderRadius: "50%", border: "1.5px dashed rgba(232,35,26,0.22)", pointerEvents: "none" }} />
-
-            {/* Counter-spinning green ring */}
-            <div className="spin-ring-reverse" style={{ position: "absolute", width: "468px", height: "468px", borderRadius: "50%", border: "1px dashed rgba(34,197,94,0.16)", pointerEvents: "none" }} />
-
-            {/* Orbiting yellow dot (clockwise, fast) */}
-            <div className="orbit-fast" style={{ position: "absolute", width: "432px", height: "432px", borderRadius: "50%", pointerEvents: "none" }}>
-              <div style={{ position: "absolute", top: "-9px", left: "50%", transform: "translateX(-50%)", width: "18px", height: "18px", borderRadius: "50%", backgroundColor: "var(--yellow)", boxShadow: "0 0 14px var(--yellow)", opacity: 0.9 }} />
-            </div>
-
-            {/* Orbiting green dot (counter-clockwise, slow) */}
-            <div className="orbit-slow-reverse" style={{ position: "absolute", width: "468px", height: "468px", borderRadius: "50%", pointerEvents: "none" }}>
-              <div style={{ position: "absolute", top: "-8px", left: "50%", transform: "translateX(-50%)", width: "15px", height: "15px", borderRadius: "50%", backgroundColor: "var(--green)", boxShadow: "0 0 12px var(--green-glow)" }} />
-            </div>
-
-            {/* Main food circle with cycling emoji */}
+            {/* Single floating group — food circle + rings + orbiting particles all move together */}
             <div
               className="float-hero anim-img"
-              style={{ width: "380px", height: "380px", borderRadius: "50%", background: "radial-gradient(circle at 38% 35%, #3a1a08, #1a0a02)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "8.5rem", border: "2px solid rgba(232,35,26,0.12)", flexShrink: 0, position: "relative", zIndex: 1, overflow: "hidden" }}
+              style={{ position: "relative", width: "380px", height: "380px", flexShrink: 0, zIndex: 1 }}
             >
-              <span key={foodKey} className="food-swap">
-                {HERO_FOODS[foodIdx]}
-              </span>
+              {/* Pulsing red glow halo */}
+              <div className="pulse-glow" style={{ position: "absolute", inset: "-40px", borderRadius: "50%", background: "radial-gradient(circle, rgba(232,35,26,0.13) 0%, transparent 65%)", pointerEvents: "none" }} />
+
+              {/* Spinning dashed red ring */}
+              <div className="spin-ring" style={{ position: "absolute", inset: "-26px", borderRadius: "50%", border: "1.5px dashed rgba(232,35,26,0.35)", pointerEvents: "none" }} />
+
+              {/* Counter-spinning green ring */}
+              <div className="spin-ring-reverse" style={{ position: "absolute", inset: "-44px", borderRadius: "50%", border: "1.5px dashed rgba(34,197,94,0.28)", pointerEvents: "none" }} />
+
+              {/* Orbiting yellow dot — rides the red ring */}
+              <div className="orbit-fast" style={{ position: "absolute", inset: "-26px", borderRadius: "50%", pointerEvents: "none" }}>
+                <div style={{ position: "absolute", top: "-9px", left: "50%", transform: "translateX(-50%)", width: "18px", height: "18px", borderRadius: "50%", backgroundColor: "var(--yellow)", boxShadow: "0 0 14px var(--yellow)", opacity: 0.9 }} />
+              </div>
+
+              {/* Orbiting green dot — rides the green ring */}
+              <div className="orbit-slow-reverse" style={{ position: "absolute", inset: "-44px", borderRadius: "50%", pointerEvents: "none" }}>
+                <div style={{ position: "absolute", top: "-8px", left: "50%", transform: "translateX(-50%)", width: "15px", height: "15px", borderRadius: "50%", backgroundColor: "var(--green)", boxShadow: "0 0 12px var(--green-glow)" }} />
+              </div>
+
+              {/* Food circle */}
+              <div style={{ width: "380px", height: "380px", borderRadius: "50%", background: "radial-gradient(circle at 38% 35%, #3a1a08, #1a0a02)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "8.5rem", border: "2px solid rgba(232,35,26,0.12)", overflow: "hidden" }}>
+                <span key={foodKey} className="food-swap">
+                  {HERO_FOODS[foodIdx]}
+                </span>
+              </div>
             </div>
 
-            {/* Tiny sparkle dots */}
+            {/* Independent decorators with their own drift animations */}
             <div className="sparkle-1" style={{ position: "absolute", top: "28%", left: "-3%", width: "9px", height: "9px", borderRadius: "50%", backgroundColor: "var(--yellow)", opacity: 0.75, zIndex: 3 }} />
             <div className="sparkle-2" style={{ position: "absolute", bottom: "28%", left: "4%", width: "7px", height: "7px", borderRadius: "50%", backgroundColor: "var(--red)", opacity: 0.65, zIndex: 3 }} />
             <div className="sparkle-3" style={{ position: "absolute", bottom: "14%", right: "10%", width: "6px", height: "6px", borderRadius: "50%", backgroundColor: "var(--green)", opacity: 0.7, zIndex: 3 }} />
 
-            {/* Green square — drifting */}
             <div className="drift-green" style={{ position: "absolute", top: "12%", left: "2%", width: "24px", height: "24px", backgroundColor: "var(--green)", borderRadius: "6px" }} />
-
-            {/* Red dot — pulsing drift */}
             <div className="drift-red" style={{ position: "absolute", bottom: "18%", right: "4%", width: "14px", height: "14px", borderRadius: "50%", backgroundColor: "var(--red)" }} />
-
-            {/* Green ring — float */}
             <div className="float-dot" style={{ position: "absolute", top: "6%", right: "3%", width: "32px", height: "32px", borderRadius: "50%", border: "5px solid var(--green)" }} />
 
             {/* Happy customers pill */}
-            <div className="float-card anim-img" style={{ position: "absolute", top: "8%", right: "-4%", background: "rgba(255,255,255,0.07)", backdropFilter: "blur(10px)", WebkitBackdropFilter: "blur(10px)", border: "1px solid rgba(255,255,255,0.12)", borderRadius: "var(--r-lg)", padding: "10px 14px", display: "flex", alignItems: "center", gap: "10px", zIndex: 2, whiteSpace: "nowrap" }}>
+            <div className="glass-pill float-card anim-img" style={{ position: "absolute", top: "8%", right: "-4%", borderRadius: "var(--r-lg)", padding: "10px 14px", display: "flex", alignItems: "center", gap: "10px", zIndex: 2, whiteSpace: "nowrap" }}>
               <div style={{ display: "flex" }}>
                 {["👩", "👨", "👩"].map((em, i) => (
                   <span key={i} style={{ width: "26px", height: "26px", borderRadius: "50%", backgroundColor: "var(--surface-2)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "0.85rem", marginLeft: i > 0 ? "-7px" : "0", border: "2px solid var(--surface)" }}>{em}</span>
@@ -279,7 +277,7 @@ const Body = () => {
             </div>
 
             {/* Delivery time badge */}
-            <div className="float-card-2 anim-4" style={{ position: "absolute", bottom: "8%", left: "-10%", background: "rgba(255,255,255,0.07)", backdropFilter: "blur(10px)", WebkitBackdropFilter: "blur(10px)", border: "1px solid rgba(255,255,255,0.12)", borderRadius: "var(--r-lg)", padding: "10px 14px", display: "flex", alignItems: "center", gap: "10px", zIndex: 2, whiteSpace: "nowrap" }}>
+            <div className="glass-pill float-card-2 anim-4" style={{ position: "absolute", bottom: "8%", left: "-10%", borderRadius: "var(--r-lg)", padding: "10px 14px", display: "flex", alignItems: "center", gap: "10px", zIndex: 2, whiteSpace: "nowrap" }}>
               <div style={{ width: "36px", height: "36px", borderRadius: "50%", backgroundColor: "rgba(232,35,26,0.15)", border: "1px solid rgba(232,35,26,0.3)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "1.1rem", flexShrink: 0 }}>
                 ⚡
               </div>

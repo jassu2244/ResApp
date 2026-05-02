@@ -13,7 +13,7 @@ const NAV_LINKS = [
 
 const Header = () => {
   const [scrolled, setScrolled] = useState(false);
-  const [theme, setTheme] = useState(() => localStorage.getItem("theme") || "light");
+  const [theme, setTheme] = useState(() => localStorage.getItem("resapp-theme") || "light");
 
   const location = useLocation();
   const onlineStatus = useOnlineStatus();
@@ -22,7 +22,7 @@ const Header = () => {
 
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
-    localStorage.setItem("theme", theme);
+    localStorage.setItem("resapp-theme", theme);
   }, [theme]);
 
   useEffect(() => {
