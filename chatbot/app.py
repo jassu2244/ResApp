@@ -1,6 +1,8 @@
 import sys
 import os
 import requests
+import threading
+import time
 
 from flask import Flask, request, jsonify
 from flask_cors import CORS
@@ -15,6 +17,29 @@ GEMINI_API_KEY = os.getenv("GEMINI_API_KEY", "")
 
 app = Flask(__name__)
 CORS(app)
+
+# ─────────────────────────────────────────────────────────
+#  KEEP-ALIVE — pings server every 10 min so Render free
+#  tier never spins down (saves ~30s cold start wait)
+# ─────────────────────────────────────────────────────────
+RENDER_URL = os.getenv("RENDER_URL", "")  # set this in Render env vars
+
+def keep_alive():
+    """Background thread: ping self every 10 minutes."""
+    while True:
+        time.sleep(600)  # 10 minutes
+        if RENDER_URL:
+            try:
+                requests.get(f"{RENDER_URL}/", timeout=10)
+                print("Keep-alive ping sent")
+            except Exception as e:
+                print(f"Keep-alive ping failed: {e}")
+
+# Start keep-alive only in production (when RENDER_URL is set)
+if RENDER_URL:
+    t = threading.Thread(target=keep_alive, daemon=True)
+    t.start()
+    print(f"Keep-alive active — pinging {RENDER_URL} every 10 min")
 
 # ─────────────────────────────────────────────────────────
 #  RESTAURANT DATA — ResApp's actual restaurant list
