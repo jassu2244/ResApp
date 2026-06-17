@@ -15,6 +15,7 @@ if hasattr(sys.stdout, "reconfigure"):
 # Load API key from .env — override=True ensures .env always wins
 load_dotenv(override=True)
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY", "")
+CUSTOMER_SUPPORT_PHONE = "1800-000-7372"
 
 app = Flask(__name__)
 CORS(app)
@@ -182,16 +183,44 @@ Rules:
 - Use **bold** for restaurant and dish names
 - Be warm, fun, and conversational
 - Decline non-food questions politely
+- If users mention technical errors, payment issues, app bugs, crashes, or the app not working, apologize briefly and share the dummy customer support number 1800-000-7372
 - Never make up restaurant names or prices not in the list
 - Keep responses concise and easy to read""".format(
     restaurant_context=build_restaurant_context()
 )
 
 
+def is_technical_support_request(message: str) -> bool:
+    text = message.lower()
+    support_terms = [
+        "technical error",
+        "tech error",
+        "app error",
+        "server error",
+        "payment failed",
+        "payment issue",
+        "bug",
+        "crash",
+        "not working",
+        "can't order",
+        "cannot order",
+        "support",
+        "helpdesk",
+    ]
+    return any(term in text for term in support_terms)
+
+
 # ─────────────────────────────────────────────────────────
 #  GEMINI REST API CALL
 # ─────────────────────────────────────────────────────────
 def call_gemini(user_message: str, history: list) -> str:
+    if is_technical_support_request(user_message):
+        return (
+            "Sorry about that! For technical errors, payment issues, or app problems, "
+            f"please contact ResApp customer support at **{CUSTOMER_SUPPORT_PHONE}**. "
+            "They'll help you get it sorted quickly."
+        )
+
     if not GEMINI_API_KEY or GEMINI_API_KEY.strip() == "":
         return (
             "No Gemini API key found! Open chatbot/.env and set:\n"
