@@ -18,12 +18,12 @@ const FEATURED = [
 ];
 
 const FALLBACK_RESTAURANTS = [
-  { id: "358251", name: "Wendy's Burgers", cuisines: ["Burgers", "American"], avgRating: 4.4, costForTwo: "₹350 for two", deliveryTime: 46, areaName: "Sector 4", promoted: false },
-  { id: "253783", name: "McDonald's", cuisines: ["American", "Fast Food", "Beverages"], avgRating: 4.4, costForTwo: "₹400 for two", deliveryTime: 30, areaName: "Nadesar", promoted: true },
-  { id: "100001", name: "KFC", cuisines: ["Chicken", "Fast Food", "Snacks"], avgRating: 4.0, costForTwo: "₹380 for two", deliveryTime: 35, areaName: "Lanka", promoted: false },
-  { id: "100002", name: "Domino's Pizza", cuisines: ["Pizza", "Italian", "Beverages"], avgRating: 4.5, costForTwo: "₹450 for two", deliveryTime: 28, areaName: "Sigra", promoted: true },
-  { id: "100003", name: "Subway", cuisines: ["Healthy Food", "Salads", "Wraps"], avgRating: 4.2, costForTwo: "₹300 for two", deliveryTime: 25, areaName: "Bhelupur", promoted: false },
-  { id: "100005", name: "Biryani Blues", cuisines: ["Biryani", "Mughlai", "North Indian"], avgRating: 4.7, costForTwo: "₹320 for two", deliveryTime: 45, areaName: "Assi", promoted: false },
+  { id: "358251", name: "Wendy's Burgers", cloudinaryImageId: "RX_THUMBNAIL/IMAGES/VENDOR/2025/1/11/41fc33b1-1a01-45a1-8062-6875cd824c67_358251.JPG", cuisines: ["Burgers", "American"], avgRating: 4.4, costForTwo: "₹350 for two", deliveryTime: 46, areaName: "Sector 4", promoted: false },
+  { id: "253783", name: "McDonald's", cloudinaryImageId: "RX_THUMBNAIL/IMAGES/VENDOR/2025/1/9/248be8d0-1623-4b8a-b42b-11072a5431d8_253783.JPG", cuisines: ["American", "Fast Food", "Beverages"], avgRating: 4.4, costForTwo: "₹400 for two", deliveryTime: 30, areaName: "Nadesar", promoted: true },
+  { id: "100001", name: "KFC", cloudinaryImageId: "RX_THUMBNAIL/IMAGES/VENDOR/2024/6/kfc_100001.jpg", cuisines: ["Chicken", "Fast Food", "Snacks"], avgRating: 4.0, costForTwo: "₹380 for two", deliveryTime: 35, areaName: "Lanka", promoted: false },
+  { id: "100002", name: "Domino's Pizza", cloudinaryImageId: "RX_THUMBNAIL/IMAGES/VENDOR/2024/6/dominos_100002.jpg", cuisines: ["Pizza", "Italian", "Beverages"], avgRating: 4.5, costForTwo: "₹450 for two", deliveryTime: 28, areaName: "Sigra", promoted: true },
+  { id: "100003", name: "Subway", cloudinaryImageId: "RX_THUMBNAIL/IMAGES/VENDOR/2024/6/subway_100003.jpg", cuisines: ["Healthy Food", "Salads", "Wraps"], avgRating: 4.2, costForTwo: "₹300 for two", deliveryTime: 25, areaName: "Bhelupur", promoted: false },
+  { id: "100005", name: "Biryani Blues", cloudinaryImageId: "RX_THUMBNAIL/IMAGES/VENDOR/2024/6/biryani_100005.jpg", cuisines: ["Biryani", "Mughlai", "North Indian"], avgRating: 4.7, costForTwo: "₹320 for two", deliveryTime: 45, areaName: "Assi", promoted: false },
   { id: "100007", name: "Chinese Express", cuisines: ["Chinese", "Asian", "Noodles"], avgRating: 4.6, costForTwo: "₹280 for two", deliveryTime: 20, areaName: "Lahurabir", promoted: true },
   { id: "100008", name: "South Spice", cuisines: ["South Indian", "Dosa", "Idli"], avgRating: 4.5, costForTwo: "₹260 for two", deliveryTime: 22, areaName: "Maidagin", promoted: false },
 ].map((info) => ({
