@@ -1,5 +1,8 @@
 # Dependencies
 node_modules/
+chatbot/venv/
+__pycache__/
+*.pyc
 
 # Build output
 dist/

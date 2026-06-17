@@ -11,6 +11,7 @@ import RestaurantMenu from "./components/RestaurantMenu";
 import Cart from "./components/Cart";
 import UserContext from "./utils/UserContext";
 import appStore from "./utils/appStore";
+import Chatbot from "./components/Chatbot";
 
 const Grocery = lazy(() => import("./components/Grocery"));
 const About = lazy(() => import("./components/About"));
@@ -28,6 +29,7 @@ const AppLayout = () => {
         <div className="app">
           <Header />
           <Outlet />
+          <Chatbot />
         </div>
       </UserContext.Provider>
     </Provider>
