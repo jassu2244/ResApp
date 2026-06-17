@@ -17,6 +17,27 @@ const FEATURED = [
   { id: "feat_6", name: "Veg Hakka Noodles", price: 16900, displayPrice: "₹169", rating: "4.4", emoji: "🍜", cat: "Chinese" },
 ];
 
+const FALLBACK_RESTAURANTS = [
+  { id: "358251", name: "Wendy's Burgers", cuisines: ["Burgers", "American"], avgRating: 4.4, costForTwo: "₹350 for two", deliveryTime: 46, areaName: "Sector 4", promoted: false },
+  { id: "253783", name: "McDonald's", cuisines: ["American", "Fast Food", "Beverages"], avgRating: 4.4, costForTwo: "₹400 for two", deliveryTime: 30, areaName: "Nadesar", promoted: true },
+  { id: "100001", name: "KFC", cuisines: ["Chicken", "Fast Food", "Snacks"], avgRating: 4.0, costForTwo: "₹380 for two", deliveryTime: 35, areaName: "Lanka", promoted: false },
+  { id: "100002", name: "Domino's Pizza", cuisines: ["Pizza", "Italian", "Beverages"], avgRating: 4.5, costForTwo: "₹450 for two", deliveryTime: 28, areaName: "Sigra", promoted: true },
+  { id: "100003", name: "Subway", cuisines: ["Healthy Food", "Salads", "Wraps"], avgRating: 4.2, costForTwo: "₹300 for two", deliveryTime: 25, areaName: "Bhelupur", promoted: false },
+  { id: "100005", name: "Biryani Blues", cuisines: ["Biryani", "Mughlai", "North Indian"], avgRating: 4.7, costForTwo: "₹320 for two", deliveryTime: 45, areaName: "Assi", promoted: false },
+  { id: "100007", name: "Chinese Express", cuisines: ["Chinese", "Asian", "Noodles"], avgRating: 4.6, costForTwo: "₹280 for two", deliveryTime: 20, areaName: "Lahurabir", promoted: true },
+  { id: "100008", name: "South Spice", cuisines: ["South Indian", "Dosa", "Idli"], avgRating: 4.5, costForTwo: "₹260 for two", deliveryTime: 22, areaName: "Maidagin", promoted: false },
+].map((info) => ({
+  card: {
+    card: {
+      "@type": "type.googleapis.com/swiggy.presentation.food.v2.Restaurant",
+      info: {
+        ...info,
+        sla: { deliveryTime: info.deliveryTime, slaString: `${info.deliveryTime} MINS` },
+      },
+    },
+  },
+}));
+
 /* ── 3D Featured Card ──────────────────────────── */
 const FeaturedCard = ({ item }) => {
   const cardRef = useRef(null);
@@ -141,9 +162,9 @@ const Body = () => {
             card?.card?.card?.["@type"] ===
             "type.googleapis.com/swiggy.presentation.food.v2.Restaurant"
         ) || [];
-      setListOfRestaurants(restaurants);
+      setListOfRestaurants(restaurants.length ? restaurants : FALLBACK_RESTAURANTS);
     } catch {
-      setListOfRestaurants([]);
+      setListOfRestaurants(FALLBACK_RESTAURANTS);
     } finally {
       setLoading(false);
     }

@@ -30,6 +30,7 @@ const Chatbot = () => {
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const chatRef = useRef(null);
   const bottomRef = useRef(null);
   const inputRef = useRef(null);
 
@@ -45,6 +46,24 @@ const Chatbot = () => {
     if (open) {
       setTimeout(() => inputRef.current?.focus(), 150);
     }
+  }, [open]);
+
+  useEffect(() => {
+    if (!open) return;
+
+    const handleOutsideClick = (event) => {
+      if (chatRef.current && !chatRef.current.contains(event.target)) {
+        setOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleOutsideClick);
+    document.addEventListener("touchstart", handleOutsideClick);
+
+    return () => {
+      document.removeEventListener("mousedown", handleOutsideClick);
+      document.removeEventListener("touchstart", handleOutsideClick);
+    };
   }, [open]);
 
   const sendMessage = async () => {
@@ -296,7 +315,7 @@ const Chatbot = () => {
   };
 
   return (
-    <>
+    <div ref={chatRef}>
       {/* Inject typing animation */}
       <style>{`
         @keyframes chatDotBounce {
@@ -409,7 +428,7 @@ const Chatbot = () => {
         </div>
 
       </div>
-    </>
+    </div>
   );
 };
 
