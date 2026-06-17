@@ -1,9 +1,8 @@
 import React, { useState, useRef, useEffect } from "react";
 
-// ─────────────────────────────────────────────────────────────
-//  CONFIG — change this URL after deploying the Python backend
-// ─────────────────────────────────────────────────────────────
-const CHATBOT_API = "http://localhost:5001/chat";
+const CHATBOT_API_BASE =
+  process.env.CHATBOT_API_URL || "http://localhost:5001";
+const CHATBOT_API = `${CHATBOT_API_BASE.replace(/\/$/, "")}/chat`;
 
 // Simple markdown-lite: bold (**text**) and line breaks
 function renderText(text) {
@@ -77,12 +76,12 @@ const Chatbot = () => {
       const data = await res.json();
       setMessages((prev) => [...prev, { from: "bot", text: data.reply }]);
     } catch (err) {
-      setError("⚠️ Could not reach the chatbot server. Make sure the Python backend is running on port 5001.");
+      setError("Could not reach the chatbot server. Please try again in a moment.");
       setMessages((prev) => [
         ...prev,
         {
           from: "bot",
-          text: "❌ Oops! I'm having trouble connecting. Please make sure the Python backend is running.",
+          text: "Oops! I'm having trouble connecting to ResBot right now.",
         },
       ]);
     } finally {

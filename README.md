@@ -37,6 +37,33 @@ This project is a clone of a restaurant application built with React. It allows 
    npm test
    ```
 
+## Hosting the Chatbot on Render
+
+The chatbot is a separate Python web service in `chatbot/`. This repo includes
+`render.yaml`, so on Render you can create a new Blueprint from the repo and it
+will deploy the `resapp-chatbot` service.
+
+Required Render environment variables for the chatbot service:
+
+- `GEMINI_API_KEY`: your Google Gemini API key
+- `RENDER_URL`: the deployed chatbot URL, for example `https://resapp-chatbot.onrender.com`
+
+The service start command is:
+
+```bash
+gunicorn app:app --bind 0.0.0.0:$PORT
+```
+
+After the chatbot is deployed, set this environment variable on your hosted
+frontend and redeploy it:
+
+```bash
+CHATBOT_API_URL=https://resapp-chatbot.onrender.com
+```
+
+The chatbot also sends a self-ping every 10 minutes when `RENDER_URL` is set.
+That helps keep the free Render service warm and reduces cold-start downtime.
+
 ## Technologies Used
 
 - React

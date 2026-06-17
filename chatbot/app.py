@@ -8,8 +8,9 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 from dotenv import load_dotenv
 
-# Fix Windows terminal Unicode issue
-sys.stdout.reconfigure(encoding="utf-8")
+# Fix Windows terminal Unicode issue safely to satisfy type checkers
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8")  # type: ignore
 
 # Load API key from .env — override=True ensures .env always wins
 load_dotenv(override=True)
@@ -22,7 +23,7 @@ CORS(app)
 #  KEEP-ALIVE — pings server every 10 min so Render free
 #  tier never spins down (saves ~30s cold start wait)
 # ─────────────────────────────────────────────────────────
-RENDER_URL = os.getenv("RENDER_URL", "")  # set this in Render env vars
+RENDER_URL = os.getenv("RENDER_URL", "").rstrip("/")  # set this in Render env vars
 
 def keep_alive():
     """Background thread: ping self every 10 minutes."""
@@ -264,7 +265,7 @@ def home():
     return jsonify({
         "status": "ResApp Chatbot running!",
         "provider": "Google Gemini",
-        "model": "gemini-2.0-flash",
+        "model": "gemini-2.5-flash",
         "ai_enabled": key_ok,
         "restaurants": len(RESTAURANTS),
     })
@@ -297,8 +298,9 @@ def get_restaurants():
 # ─────────────────────────────────────────────────────────
 if __name__ == "__main__":
     key_ok = bool(GEMINI_API_KEY and GEMINI_API_KEY.strip())
+    port = int(os.getenv("PORT", "5001"))
     print("ResApp Chatbot (Gemini) starting...")
     print(f"Model  : gemini-2.5-flash")
     print(f"AI     : {'ACTIVE' if key_ok else 'NO KEY - add GEMINI_API_KEY to chatbot/.env'}")
-    print("Server : http://localhost:5001")
-    app.run(debug=True, port=5001)
+    print(f"Server : http://localhost:{port}")
+    app.run(debug=os.getenv("FLASK_DEBUG") == "1", host="0.0.0.0", port=port)
