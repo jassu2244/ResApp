@@ -5449,7 +5449,7 @@ const mockRestaurantData = {
             info: {
               id: "100005",
               name: "Biryani Blues",
-              cloudinaryImageId: "RX_THUMBNAIL/IMAGES/VENDOR/2024/6/biryani_100005.jpg",
+              cloudinaryImageId: "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=660&q=80",
               locality: "Assi",
               areaName: "Assi",
               costForTwo: "₹320 for two",
@@ -5470,7 +5470,7 @@ const mockRestaurantData = {
             info: {
               id: "100006",
               name: "The Tandoor Club",
-              cloudinaryImageId: "RX_THUMBNAIL/IMAGES/VENDOR/2024/6/tandoor_100006.jpg",
+              cloudinaryImageId: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=660&q=80",
               locality: "Dashashwamedh",
               areaName: "Dashashwamedh",
               costForTwo: "₹550 for two",
