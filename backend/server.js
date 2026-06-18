@@ -5526,6 +5526,27 @@ const mockRestaurantData = {
           },
         },
       },
+      {
+        card: {
+          card: {
+            "@type": "type.googleapis.com/swiggy.presentation.food.v2.Restaurant",
+            info: {
+              id: "100009",
+              name: "Burger King",
+              cloudinaryImageId: "RX_THUMBNAIL/IMAGES/VENDOR/2024/6/burgerking_100009.jpg",
+              locality: "Sigra",
+              areaName: "Sigra",
+              costForTwo: "₹350 for two",
+              cuisines: ["Burgers", "American", "Fast Food"],
+              avgRating: 4.3,
+              avgRatingString: "4.3",
+              totalRatingsString: "21K+",
+              promoted: true,
+              sla: { deliveryTime: 32, slaString: "30-35 MINS" },
+            },
+          },
+        },
+      },
     ],
   },
 };
