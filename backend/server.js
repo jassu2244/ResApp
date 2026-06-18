@@ -5491,7 +5491,7 @@ const mockRestaurantData = {
             info: {
               id: "100007",
               name: "Chinese Express",
-              cloudinaryImageId: "RX_THUMBNAIL/IMAGES/VENDOR/2024/6/chinese_100007.jpg",
+              cloudinaryImageId: "https://images.unsplash.com/photo-1563245372-f21724e3856d?w=660&q=80",
               locality: "Lahurabir",
               areaName: "Lahurabir",
               costForTwo: "₹280 for two",
@@ -5512,7 +5512,7 @@ const mockRestaurantData = {
             info: {
               id: "100008",
               name: "South Spice",
-              cloudinaryImageId: "RX_THUMBNAIL/IMAGES/VENDOR/2024/6/south_100008.jpg",
+              cloudinaryImageId: "https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=660&q=80",
               locality: "Maidagin",
               areaName: "Maidagin",
               costForTwo: "₹260 for two",
@@ -5533,7 +5533,7 @@ const mockRestaurantData = {
             info: {
               id: "100009",
               name: "Burger King",
-              cloudinaryImageId: "RX_THUMBNAIL/IMAGES/VENDOR/2024/6/burgerking_100009.jpg",
+              cloudinaryImageId: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=660&q=80",
               locality: "Sigra",
               areaName: "Sigra",
               costForTwo: "₹350 for two",
