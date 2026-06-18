@@ -433,7 +433,15 @@ const Body = () => {
   const filteredRestaurant = useMemo(() => {
     let list = listOfRestaurants;
     if (appliedSearch) {
-      list = list.filter((r) => r.card.card.info.name.toLowerCase().includes(appliedSearch.toLowerCase()));
+      const q = appliedSearch.toLowerCase();
+      list = list.filter((r) => {
+        const info = r.card.card.info;
+        return (
+          info.name?.toLowerCase().includes(q) ||
+          info.cuisines?.some((c) => c.toLowerCase().includes(q)) ||
+          info.areaName?.toLowerCase().includes(q)
+        );
+      });
     }
     if (activeFilter === "toprated") {
       list = list.filter((r) => r.card.card.info.avgRating > 4);
