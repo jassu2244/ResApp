@@ -5365,7 +5365,7 @@ const mockRestaurantData = {
             info: {
               id: "100001",
               name: "KFC",
-              cloudinaryImageId: "RX_THUMBNAIL/IMAGES/VENDOR/2024/6/kfc_100001.jpg",
+              cloudinaryImageId: "https://images.unsplash.com/photo-1513639776629-7b61b0ac49cb?w=660&q=80",
               locality: "Lanka",
               areaName: "Lanka",
               costForTwo: "₹380 for two",
@@ -5386,7 +5386,7 @@ const mockRestaurantData = {
             info: {
               id: "100002",
               name: "Domino's Pizza",
-              cloudinaryImageId: "RX_THUMBNAIL/IMAGES/VENDOR/2024/6/dominos_100002.jpg",
+              cloudinaryImageId: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=660&q=80",
               locality: "Sigra",
               areaName: "Sigra",
               costForTwo: "₹450 for two",
@@ -5407,7 +5407,7 @@ const mockRestaurantData = {
             info: {
               id: "100003",
               name: "Subway",
-              cloudinaryImageId: "RX_THUMBNAIL/IMAGES/VENDOR/2024/6/subway_100003.jpg",
+              cloudinaryImageId: "https://images.unsplash.com/photo-1509722747041-616f39b57569?w=660&q=80",
               locality: "Bhelupur",
               areaName: "Bhelupur",
               costForTwo: "₹300 for two",
@@ -5428,7 +5428,7 @@ const mockRestaurantData = {
             info: {
               id: "100004",
               name: "Pizza Hut",
-              cloudinaryImageId: "RX_THUMBNAIL/IMAGES/VENDOR/2024/6/pizzahut_100004.jpg",
+              cloudinaryImageId: "https://images.unsplash.com/photo-1574071318508-1cdbab80d002?w=660&q=80",
               locality: "Mahmoorganj",
               areaName: "Mahmoorganj",
               costForTwo: "₹500 for two",
