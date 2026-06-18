@@ -8,7 +8,7 @@ import { CDN_URL } from "../utils/constants";
 const RestaurantMenu = () => {
   const { resId } = useParams();
   const resInfo = useRestaurantMenu(resId);
-  const [showIndex, setShowIndex] = useState(0);
+  const [showIndex, setShowIndex] = useState(null);
 
   if (resInfo === null) return <ShimmerMenu />;
 
@@ -87,7 +87,7 @@ const RestaurantMenu = () => {
                 key={category?.card?.card.title}
                 data={category?.card?.card}
                 showItems={index === showIndex}
-                setShowIndex={() => setShowIndex(index)}
+                setShowIndex={() => setShowIndex(showIndex === index ? null : index)}
               />
             ))}
           </>

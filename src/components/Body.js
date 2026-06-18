@@ -27,6 +27,7 @@ const FALLBACK_RESTAURANTS = [
   { id: "100005", name: "Biryani Blues", cloudinaryImageId: "RX_THUMBNAIL/IMAGES/VENDOR/2024/6/biryani_100005.jpg", cuisines: ["Biryani", "Mughlai", "North Indian"], avgRating: 4.7, costForTwo: "₹320 for two", deliveryTime: 45, areaName: "Assi", promoted: false },
   { id: "100007", name: "Chinese Express", cuisines: ["Chinese", "Asian", "Noodles"], avgRating: 4.6, costForTwo: "₹280 for two", deliveryTime: 20, areaName: "Lahurabir", promoted: true },
   { id: "100008", name: "South Spice", cuisines: ["South Indian", "Dosa", "Idli"], avgRating: 4.5, costForTwo: "₹260 for two", deliveryTime: 22, areaName: "Maidagin", promoted: false },
+  { id: "100009", name: "Burger King", cloudinaryImageId: "RX_THUMBNAIL/IMAGES/VENDOR/2024/6/burgerking_100009.jpg", cuisines: ["Burgers", "American", "Fast Food"], avgRating: 4.3, costForTwo: "₹350 for two", deliveryTime: 32, areaName: "Sigra", promoted: true },
 ].map((info) => ({
   card: {
     card: {
