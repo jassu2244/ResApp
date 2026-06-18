@@ -12,23 +12,27 @@ const RestaurantMenu = () => {
 
   if (resInfo === null) return <ShimmerMenu />;
 
+  // resInfo === false means the fetch failed — use empty fallback
+  const safeResInfo = resInfo || { cards: [] };
+
   const restaurantInfo =
-    resInfo?.cards[2]?.card?.card?.info ||
-    resInfo?.cards[0]?.card?.card?.info ||
+    safeResInfo?.cards[2]?.card?.card?.info ||
+    safeResInfo?.cards[0]?.card?.card?.info ||
     {};
 
   const { name, cuisines, costForTwoMessage, cloudinaryImageId, avgRating, sla } = restaurantInfo;
   const deliveryTime = sla?.deliveryTime;
 
   const regularCards =
-    resInfo?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards ||
-    resInfo?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards ||
-    resInfo?.cards[3]?.groupedCard?.cardGroupMap?.REGULAR?.cards ||
+    safeResInfo?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards ||
+    safeResInfo?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards ||
+    safeResInfo?.cards[3]?.groupedCard?.cardGroupMap?.REGULAR?.cards ||
     [];
 
   const categories = regularCards.filter(
     (c) => c.card?.card?.["@type"] === "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory"
   );
+
 
   return (
     <div style={{ background: "var(--bg)", minHeight: "100vh" }}>

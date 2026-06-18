@@ -5,6 +5,7 @@ import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus";
 import { addItem, removeItemById } from "../utils/cartSlice";
+import { RESTAURANTS_API } from "../utils/constants";
 
 const HERO_FOODS = ["🍔", "🍕", "🍛", "🍜", "🌮", "🍗", "🥗", "🍣", "🍱", "🧆"];
 
@@ -154,7 +155,7 @@ const Body = () => {
 
   const fetchData = async () => {
     try {
-      const data = await fetch("/api/restaurants");
+      const data = await fetch(RESTAURANTS_API);
       const json = await data.json();
       const restaurants =
         json?.data?.cards?.filter(
@@ -338,7 +339,11 @@ const Body = () => {
               type="text"
               placeholder="Search restaurants..."
               value={searchText}
-              onChange={(e) => setSearchText(e.target.value)}
+              onChange={(e) => {
+                const val = e.target.value;
+                setSearchText(val);
+                if (val === "") setAppliedSearch("");
+              }}
               onKeyDown={(e) => e.key === "Enter" && handleSearch()}
               style={{ flex: 1, padding: "12px 0", background: "transparent", border: "none", outline: "none", color: "var(--text)", fontFamily: "var(--f-body)", fontSize: "0.92rem" }}
             />

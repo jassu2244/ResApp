@@ -2,18 +2,34 @@ const express = require("express");
 const cors = require("cors");
 const fetch = require("node-fetch");
 
-
-
 const app = express();
 const PORT = process.env.PORT || 3001;
-
-// Swiggy API base URL for menu
-const SWIGGY_MENU_API =
-  "https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=25.332590909546596&lng=83.00543960183859&restaurantId=";
 
 // Enable CORS for your React app
 app.use(cors());
 app.use(express.json());
+
+// ─────────────────────────────────────────────────────────
+//  KEEP-ALIVE — pings self every 10 min so Render free
+//  tier never spins down (avoids ~50s cold start delay)
+// ─────────────────────────────────────────────────────────
+const RENDER_URL = (process.env.RENDER_URL || "").replace(/\/$/, "");
+
+if (RENDER_URL) {
+  setInterval(async () => {
+    try {
+      await fetch(`${RENDER_URL}/api/health`, { timeout: 10000 });
+      console.log("Keep-alive ping sent to", RENDER_URL);
+    } catch (e) {
+      console.log("Keep-alive ping failed:", e.message);
+    }
+  }, 10 * 60 * 1000); // every 10 minutes
+  console.log(`Keep-alive active — pinging ${RENDER_URL} every 10 min`);
+}
+
+// Swiggy API base URL for menu
+const SWIGGY_MENU_API =
+  "https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=25.332590909546596&lng=83.00543960183859&restaurantId=";
 
 // Mock menu data
 const mockMenuData = {
