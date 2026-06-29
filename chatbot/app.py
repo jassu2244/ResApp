@@ -200,7 +200,6 @@ def is_technical_support_request(message: str) -> bool:
     ]
     return any(term in text for term in support_terms)
 
-
 def call_gemini(user_message: str, history: list) -> str:
     if is_technical_support_request(user_message):
         return (
@@ -222,7 +221,6 @@ def call_gemini(user_message: str, history: list) -> str:
     )
 
     contents = []
-
 
     for msg in history[-6:]:
         role = "user" if msg.get("role") == "user" else "model"
@@ -272,9 +270,7 @@ def call_gemini(user_message: str, history: list) -> str:
         return f"Error: {str(e)}"
 
 
-# ─────────────────────────────────────────────────────────
 #  API ROUTES
-# ─────────────────────────────────────────────────────────
 @app.route("/", methods=["GET"])
 def home():
     key_ok = bool(GEMINI_API_KEY and GEMINI_API_KEY.strip())
