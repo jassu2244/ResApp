@@ -8,11 +8,11 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 from dotenv import load_dotenv
 
-# Fix Windows terminal Unicode issue safely to satisfy type checkers
-if hasattr(sys.stdout, "reconfigure"):
-    sys.stdout.reconfigure(encoding="utf-8")  # type: ignore
 
-# Load API key from .env — override=True ensures .env always wins
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8")
+
+
 load_dotenv(override=True)
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY", "")
 CUSTOMER_SUPPORT_PHONE = "1800-000-7372"
@@ -20,16 +20,12 @@ CUSTOMER_SUPPORT_PHONE = "1800-000-7372"
 app = Flask(__name__)
 CORS(app)
 
-# ─────────────────────────────────────────────────────────
-#  KEEP-ALIVE — pings server every 10 min so Render free
-#  tier never spins down (saves ~30s cold start wait)
-# ─────────────────────────────────────────────────────────
-RENDER_URL = os.getenv("RENDER_URL", "").rstrip("/")  # set this in Render env vars
+RENDER_URL = os.getenv("RENDER_URL", "").rstrip("/")
 
 def keep_alive():
     """Background thread: ping self every 10 minutes."""
     while True:
-        time.sleep(600)  # 10 minutes
+        time.sleep(600) 
         if RENDER_URL:
             try:
                 requests.get(f"{RENDER_URL}/", timeout=10)
@@ -37,15 +33,12 @@ def keep_alive():
             except Exception as e:
                 print(f"Keep-alive ping failed: {e}")
 
-# Start keep-alive only in production (when RENDER_URL is set)
+
 if RENDER_URL:
     t = threading.Thread(target=keep_alive, daemon=True)
     t.start()
     print(f"Keep-alive active — pinging {RENDER_URL} every 10 min")
 
-# ─────────────────────────────────────────────────────────
-#  RESTAURANT DATA — ResApp's actual restaurant list
-# ─────────────────────────────────────────────────────────
 RESTAURANTS = [
     {
         "name": "Wendy's Burgers",
@@ -162,10 +155,8 @@ def build_restaurant_context() -> str:
     return "\n".join(lines)
 
 
-# ─────────────────────────────────────────────────────────
-#  SYSTEM PROMPT
-# ─────────────────────────────────────────────────────────
 SYSTEM_PROMPT = """You are ResBot, a friendly and enthusiastic AI food assistant for ResApp - a food delivery platform in India.
+
 
 Your job:
 - Help users find the best restaurants and dishes based on what they are craving
@@ -210,9 +201,6 @@ def is_technical_support_request(message: str) -> bool:
     return any(term in text for term in support_terms)
 
 
-# ─────────────────────────────────────────────────────────
-#  GEMINI REST API CALL
-# ─────────────────────────────────────────────────────────
 def call_gemini(user_message: str, history: list) -> str:
     if is_technical_support_request(user_message):
         return (
@@ -233,10 +221,9 @@ def call_gemini(user_message: str, history: list) -> str:
         f"gemini-2.5-flash:generateContent?key={GEMINI_API_KEY}"
     )
 
-    # Build conversation contents
     contents = []
 
-    # Add recent chat history for context (last 6 messages)
+
     for msg in history[-6:]:
         role = "user" if msg.get("role") == "user" else "model"
         contents.append({
@@ -244,7 +231,7 @@ def call_gemini(user_message: str, history: list) -> str:
             "parts": [{"text": msg.get("text", "")}]
         })
 
-    # Add current user message
+
     contents.append({
         "role": "user",
         "parts": [{"text": user_message}]
